@@ -13,6 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 FRAMEWORK_DIR = ROOT / "framework"
 PUBLIC_DIR = ROOT / "public"
 OUTPUT_PATH = PUBLIC_DIR / "index.html"
+MOMENTUM_OUTPUT_PATH = PUBLIC_DIR / "momentum.html"
 
 
 def read_csv(path: Path) -> list[dict[str, str]]:
@@ -162,6 +163,29 @@ def status_class(status: str) -> str:
     return "missing"
 
 
+def decision_class(decision: str) -> str:
+    return {
+        "Add": "ok",
+        "Hold": "neutral",
+        "Watch": "warn",
+        "Cut": "missing",
+    }.get(decision, "neutral")
+
+
+def parse_percent(value: str) -> float:
+    try:
+        return float(value.replace("%", "").strip())
+    except (AttributeError, ValueError):
+        return 0.0
+
+
+def parse_score(value: str) -> float:
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return 0.0
+
+
 def build_table(rows: list[dict[str, str]], columns: list[tuple[str, str]], class_name: str = "") -> str:
     header = "".join(f"<th>{esc(label)}</th>" for key, label in columns)
     body = []
@@ -171,6 +195,8 @@ def build_table(rows: list[dict[str, str]], columns: list[tuple[str, str]], clas
             value = row.get(key, "")
             if key == "momentum_status":
                 cells += f'<td><span class="badge {esc(row.get("status_class", ""))}">{esc(value)}</span></td>'
+            elif key in {"decision", "opportunity"}:
+                cells += f'<td><span class="badge {esc(row.get("decision_class", ""))}">{esc(value)}</span></td>'
             else:
                 cells += f"<td>{esc(value)}</td>"
         body.append(f"<tr>{cells}</tr>")
@@ -475,6 +501,7 @@ def render_dashboard() -> str:
     <div class="hero">
       <h1>DB GAPS EMP 운용 대시보드</h1>
       <p>2026년 6-8월 ETF EMP 전략 현황입니다. GitHub Actions 생성 시각: {esc(generated_at)}.</p>
+      <p><a href="momentum.html">주식 모멘텀 대시보드 보기</a></p>
     </div>
   </header>
   <main>
@@ -582,10 +609,225 @@ def render_dashboard() -> str:
 """
 
 
+def render_momentum_dashboard() -> str:
+    equity = read_csv(FRAMEWORK_DIR / "equity-momentum.csv")
+    generated_at = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    price_data_as_of = equity[0].get("price_data_as_of", "미수집") if equity else "미수집"
+
+    add_rows = [row for row in equity if row["decision"] == "Add"]
+    cut_rows = [row for row in equity if row["decision"] == "Cut"]
+    watch_rows = [row for row in equity if row["decision"] == "Watch"]
+    hold_rows = [row for row in equity if row["decision"] == "Hold"]
+
+    def row_view(row: dict[str, str]) -> dict[str, str]:
+        return {
+            "opportunity": row["opportunity"],
+            "ticker": row["ticker"],
+            "etf_name": row["etf_name"],
+            "competition_category": row["competition_category"],
+            "cluster": row["cluster"],
+            "target_weight": fmt_weight(row["target_weight"]),
+            "one_month_return": row["one_month_return"],
+            "three_month_return": row["three_month_return"],
+            "six_month_return": row["six_month_return"],
+            "above_20d_ma": row["above_20d_ma"],
+            "above_60d_ma": row["above_60d_ma"],
+            "drawdown_from_60d_high": row["drawdown_from_60d_high"],
+            "relative_rank": row["relative_rank"],
+            "momentum_score": row["momentum_score"],
+            "decision": decision_label(row["decision"]),
+            "decision_class": decision_class(row["decision"]),
+        }
+
+    ranked_rows = [row_view(row) for row in sorted(equity, key=lambda row: parse_score(row["momentum_score"]), reverse=True)]
+    buy_rows = [row_view(row) for row in add_rows]
+    sell_rows = [row_view(row) for row in cut_rows]
+
+    best = ranked_rows[0] if ranked_rows else {}
+    weakest = ranked_rows[-1] if ranked_rows else {}
+
+    return f"""<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DB GAPS 주식 모멘텀 대시보드</title>
+  <style>
+    :root {{
+      color-scheme: light;
+      --bg: #f5f6f8;
+      --panel: #ffffff;
+      --text: #151923;
+      --muted: #687386;
+      --line: #d9dee7;
+      --accent: #1f5f99;
+      --safe: #067647;
+      --warn: #b54708;
+      --missing: #7a271a;
+    }}
+    * {{ box-sizing: border-box; }}
+    body {{
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }}
+    header {{
+      padding: 30px 24px 22px;
+      background: linear-gradient(180deg, #ffffff 0%, #eef4ff 100%);
+      border-bottom: 1px solid var(--line);
+    }}
+    main {{ max-width: 1180px; margin: 0 auto; padding: 24px; }}
+    .hero {{ max-width: 1180px; margin: 0 auto; }}
+    h1, h2 {{ margin: 0; line-height: 1.2; }}
+    h1 {{ font-size: 28px; }}
+    h2 {{ font-size: 18px; margin-bottom: 12px; }}
+    p {{ margin: 8px 0 0; color: var(--muted); }}
+    a {{ color: var(--accent); font-weight: 700; text-decoration: none; }}
+    section {{ margin-bottom: 24px; }}
+    .cards {{
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }}
+    .card, .panel {{
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px 16px;
+    }}
+    .label {{ color: var(--muted); font-size: 12px; font-weight: 700; }}
+    .value {{ margin-top: 6px; font-size: 24px; font-weight: 800; }}
+    .grid-2 {{ display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }}
+    .badge {{
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      background: #edf2f7;
+      color: #344054;
+    }}
+    .badge.ok {{ background: #ecfdf3; color: var(--safe); }}
+    .badge.warn {{ background: #fffaeb; color: var(--warn); }}
+    .badge.missing {{ background: #fef3f2; color: var(--missing); }}
+    .badge.neutral {{ background: #eef4ff; color: var(--accent); }}
+    .table-wrap {{
+      overflow-x: auto;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }}
+    table {{ width: 100%; min-width: 920px; border-collapse: collapse; }}
+    th, td {{
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }}
+    th {{ background: #f0f3f8; color: #3d4758; font-size: 12px; }}
+    tr:last-child td {{ border-bottom: 0; }}
+    .guide {{ display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }}
+    .guide b {{ display: block; margin-bottom: 4px; }}
+    @media (max-width: 840px) {{
+      header {{ padding: 22px 16px 14px; }}
+      main {{ padding: 16px; }}
+      .cards, .grid-2, .guide {{ grid-template-columns: 1fr; }}
+      h1 {{ font-size: 24px; }}
+    }}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="hero">
+      <h1>주식 모멘텀 대시보드</h1>
+      <p>현재 보유 중인 주식 ETF 유니버스의 모멘텀만 따로 봅니다. 가격 데이터 기준일: {esc(price_data_as_of)}. 생성 시각: {esc(generated_at)}.</p>
+      <p><a href="index.html">종합 대시보드로 돌아가기</a></p>
+    </div>
+  </header>
+  <main>
+    <section class="cards" aria-label="Momentum summary">
+      <div class="card"><div class="label">확대 후보</div><div class="value">{len(add_rows)}</div></div>
+      <div class="card"><div class="label">유지</div><div class="value">{len(hold_rows)}</div></div>
+      <div class="card"><div class="label">관찰</div><div class="value">{len(watch_rows)}</div></div>
+      <div class="card"><div class="label">축소 후보</div><div class="value">{len(cut_rows)}</div></div>
+    </section>
+
+    <section class="grid-2">
+      <div class="panel">
+        <h2>가장 강한 모멘텀</h2>
+        <p>{esc(best.get("ticker", "-"))} · {esc(best.get("etf_name", "-"))}</p>
+        <p>점수 {esc(best.get("momentum_score", "-"))}, 3M {esc(best.get("three_month_return", "-"))}, 60D 고점 대비 {esc(best.get("drawdown_from_60d_high", "-"))}</p>
+      </div>
+      <div class="panel">
+        <h2>가장 약한 모멘텀</h2>
+        <p>{esc(weakest.get("ticker", "-"))} · {esc(weakest.get("etf_name", "-"))}</p>
+        <p>점수 {esc(weakest.get("momentum_score", "-"))}, 3M {esc(weakest.get("three_month_return", "-"))}, 60D 고점 대비 {esc(weakest.get("drawdown_from_60d_high", "-"))}</p>
+      </div>
+    </section>
+
+    <section class="guide">
+      <div class="panel"><b>확대 후보</b>점수 80 이상. 카테고리 한도와 기존 비중을 확인한 뒤 증액 검토.</div>
+      <div class="panel"><b>관찰 후보</b>점수 50-64. 다음 주 업데이트 전까지 신규 매수 보류.</div>
+      <div class="panel"><b>축소 후보</b>점수 50 미만. 추세 이탈과 낙폭이 겹치면 교체 후보 탐색.</div>
+    </section>
+
+    <section class="grid-2">
+      <div>
+        <h2>매수/확대 후보</h2>
+        {build_table(buy_rows, [
+          ("opportunity", "판정"),
+          ("ticker", "티커"),
+          ("etf_name", "ETF"),
+          ("three_month_return", "3M"),
+          ("above_60d_ma", "60D 상회"),
+          ("momentum_score", "점수"),
+        ])}
+      </div>
+      <div>
+        <h2>매도/축소 후보</h2>
+        {build_table(sell_rows, [
+          ("opportunity", "판정"),
+          ("ticker", "티커"),
+          ("etf_name", "ETF"),
+          ("one_month_return", "1M"),
+          ("drawdown_from_60d_high", "60D 고점 대비"),
+          ("momentum_score", "점수"),
+        ])}
+      </div>
+    </section>
+
+    <section>
+      <h2>주식 ETF 모멘텀 랭킹</h2>
+      {build_table(ranked_rows, [
+        ("opportunity", "판정"),
+        ("ticker", "티커"),
+        ("etf_name", "ETF"),
+        ("competition_category", "분류"),
+        ("cluster", "클러스터"),
+        ("target_weight", "현재 비중"),
+        ("one_month_return", "1M"),
+        ("three_month_return", "3M"),
+        ("six_month_return", "6M"),
+        ("above_20d_ma", "20D"),
+        ("above_60d_ma", "60D"),
+        ("drawdown_from_60d_high", "60D 고점 대비"),
+        ("relative_rank", "상대순위"),
+        ("momentum_score", "점수"),
+      ])}
+    </section>
+  </main>
+</body>
+</html>
+"""
+
+
 def main() -> None:
     PUBLIC_DIR.mkdir(exist_ok=True)
     OUTPUT_PATH.write_text(render_dashboard(), encoding="utf-8")
+    MOMENTUM_OUTPUT_PATH.write_text(render_momentum_dashboard(), encoding="utf-8")
     print(f"wrote={OUTPUT_PATH}")
+    print(f"wrote={MOMENTUM_OUTPUT_PATH}")
 
 
 if __name__ == "__main__":

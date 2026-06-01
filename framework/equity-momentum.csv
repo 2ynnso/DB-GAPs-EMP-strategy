@@ -1,0 +1,9 @@
+price_data_as_of,ticker,etf_name,competition_category,cluster,target_weight,one_month_return,three_month_return,six_month_return,above_20d_ma,above_60d_ma,drawdown_from_60d_high,relative_rank,momentum_score,decision,opportunity,data_source
+2026-06-01,A395160,KODEX AI반도체,국내주식_섹터,AI & Semiconductors,8,60.25%,85.87%,248.22%,Y,Y,0.00%,1/8,100.0,Add,매수/확대 후보,Yahoo Finance chart API
+2026-06-01,A069500,KODEX 200,국내주식_지수,Core Equity Beta,10,40.41%,48.80%,160.76%,Y,Y,0.00%,2/8,95.7,Add,매수/확대 후보,Yahoo Finance chart API
+2026-06-01,A497570,TIGER 미국필라델피아AI반도체나스닥,해외주식_섹터,AI & Semiconductors,6,19.46%,41.37%,67.62%,Y,Y,0.00%,3/8,91.4,Add,매수/확대 후보,Yahoo Finance chart API
+2026-06-01,A133690,TIGER 미국나스닥100,해외주식_지수,AI & Semiconductors,12,14.18%,27.29%,29.05%,Y,Y,0.00%,4/8,87.1,Add,매수/확대 후보,Yahoo Finance chart API
+2026-06-01,A360750,TIGER 미국S&P500,해외주식_지수,Core Equity Beta,13,8.02%,15.66%,18.19%,Y,Y,0.00%,6/8,78.6,Hold,보유 유지,Yahoo Finance chart API
+2026-06-01,A487230,KODEX 미국AI전력핵심인프라,해외주식_섹터,AI Power Infrastructure,4,2.40%,25.61%,53.37%,N,Y,-8.06%,5/8,61.9,Watch,관찰 후보,Yahoo Finance chart API
+2026-06-01,A466920,SOL 조선TOP3플러스,국내주식_섹터,Korea Cyclical Alpha,4,-10.28%,-1.44%,10.43%,N,Y,-11.16%,7/8,25.3,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-06-01,A449450,PLUS K방산,국내주식_섹터,Korea Cyclical Alpha,3,-13.25%,-1.98%,35.18%,N,N,-16.63%,8/8,10.5,Cut,매도/축소 후보,Yahoo Finance chart API

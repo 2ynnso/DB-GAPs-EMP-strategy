@@ -51,9 +51,12 @@ After that, pushes to `main` will deploy the dashboard.
 | `.github/workflows/dashboard.yml` | CI/CD workflow |
 | `scripts/build-dashboard.py` | Static dashboard generator |
 | `scripts/build-etf-master.py` | ETF master generator |
+| `scripts/update-momentum.py` | Price API fetch and momentum calculator |
 | `public/index.html` | Generated local preview artifact |
+| `public/momentum.html` | Generated equity momentum dashboard |
 | `framework/initial-portfolio.csv` | Initial allocation source |
 | `framework/etf-master.csv` | Enriched ETF universe |
+| `framework/equity-momentum.csv` | Equity ETF momentum ranking |
 | `framework/weekly-monitoring-dashboard.csv` | Weekly monitoring source |
 | `framework/monthly-rebalance-log.csv` | Rebalance log source |
 
@@ -95,3 +98,16 @@ Calculated fields:
 - Add/Hold/Watch/Cut decision.
 
 Flow and macro fields remain manual checks because they require non-price data.
+
+## Equity Momentum Dashboard
+
+`public/momentum.html` is a focused page for stock ETF momentum only.
+
+It includes:
+
+- Buy/expand candidates.
+- Sell/reduce candidates.
+- Strongest and weakest momentum names.
+- Full ranking of invested equity ETFs.
+
+The page intentionally excludes bonds, money-market ETFs, and commodity hedges so that the team can quickly see which stock exposures deserve more capital and which should be reduced.

@@ -116,6 +116,7 @@ The dashboard UI is Korean-first and shows:
 - Risk/safe split.
 - Cluster and category usage.
 - Weekly monitoring actions.
+- A separate equity momentum dashboard for buy/expand and sell/reduce candidates.
 
 Momentum is updated automatically by GitHub Actions. The workflow calls Yahoo Finance's chart API for the selected KRX ETF tickers, computes 1M/3M/6M returns, trend filters, drawdown, relative rank, cluster score, and then rebuilds the dashboard.
 
@@ -133,6 +134,11 @@ GitHub Pages setup:
 3. Set `Build and deployment` source to `GitHub Actions`.
 
 After that, pushes to `main` will run `.github/workflows/dashboard.yml` and deploy `public/index.html`.
+
+Pages:
+
+- Main dashboard: `index.html`
+- Equity momentum dashboard: `momentum.html`
 
 Automatic update schedule:
 

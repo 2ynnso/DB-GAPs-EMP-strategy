@@ -85,6 +85,21 @@ jobs:
           print("Momentum validation passed")
           PY
 
+      - name: Validate equity momentum data
+        run: |
+          python3 - <<'PY'
+          import csv
+
+          with open("framework/equity-momentum.csv", newline="", encoding="utf-8") as handle:
+              rows = list(csv.DictReader(handle))
+
+          assert len(rows) == 8, f"expected 8 equity ETF rows, got {len(rows)}"
+          for row in rows:
+              for field in ["one_month_return", "three_month_return", "six_month_return", "momentum_score", "opportunity"]:
+                  assert row.get(field), f"{row['ticker']} missing {field}"
+          print("Equity momentum validation passed")
+          PY
+
       - name: Build dashboard
         run: python3 scripts/build-dashboard.py
 
@@ -93,7 +108,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add framework/weekly-monitoring-dashboard.csv framework/etf-master.csv
+          git add framework/weekly-monitoring-dashboard.csv framework/equity-momentum.csv framework/etf-master.csv
           if git diff --cached --quiet; then
             echo "No momentum data changes to commit"
           else

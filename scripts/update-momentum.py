@@ -17,6 +17,7 @@ ROOT = Path(__file__).resolve().parents[1]
 FRAMEWORK_DIR = ROOT / "framework"
 PORTFOLIO_PATH = FRAMEWORK_DIR / "initial-portfolio.csv"
 WEEKLY_PATH = FRAMEWORK_DIR / "weekly-monitoring-dashboard.csv"
+EQUITY_MOMENTUM_PATH = FRAMEWORK_DIR / "equity-momentum.csv"
 
 TRADING_DAYS_1M = 21
 TRADING_DAYS_3M = 63
@@ -44,6 +45,33 @@ REQUIRED_FIELDS = [
     "price_data_as_of",
     "data_source",
 ]
+
+EQUITY_MOMENTUM_FIELDS = [
+    "price_data_as_of",
+    "ticker",
+    "etf_name",
+    "competition_category",
+    "cluster",
+    "target_weight",
+    "one_month_return",
+    "three_month_return",
+    "six_month_return",
+    "above_20d_ma",
+    "above_60d_ma",
+    "drawdown_from_60d_high",
+    "relative_rank",
+    "momentum_score",
+    "decision",
+    "opportunity",
+    "data_source",
+]
+
+EQUITY_CATEGORIES = {
+    "국내주식_지수",
+    "국내주식_섹터",
+    "해외주식_지수",
+    "해외주식_섹터",
+}
 
 DEFENSIVE_CLUSTERS = {
     "Short-Duration Safety",
@@ -234,11 +262,87 @@ def score_cluster(row: dict[str, float | bool], relative_percentile: float) -> f
     return round(0.70 * (absolute_score + risk_score) + 0.30 * relative_percentile, 1)
 
 
+def score_equity(metric: dict[str, float | bool | str], relative_percentile: float) -> float:
+    row = {
+        "one_month_return": metric["one_month_return"],
+        "three_month_return": metric["three_month_return"],
+        "six_month_return": metric["six_month_return"],
+        "above_20d_ma": metric["above_20d_ma"],
+        "above_60d_ma": metric["above_60d_ma"],
+        "drawdown_from_60d_high": metric["drawdown_from_60d_high"],
+    }
+    return score_cluster(row, relative_percentile)
+
+
+def opportunity_label(decision: str) -> str:
+    return {
+        "Add": "매수/확대 후보",
+        "Hold": "보유 유지",
+        "Watch": "관찰 후보",
+        "Cut": "매도/축소 후보",
+    }[decision]
+
+
+def write_equity_momentum(
+    portfolio: list[dict[str, str]],
+    metrics: dict[str, dict[str, float | bool | str]],
+    as_of: str,
+) -> None:
+    equity_rows = [
+        row for row in portfolio
+        if row["competition_category"] in EQUITY_CATEGORIES and row["ticker"] in metrics
+    ]
+    ranked = sorted(
+        equity_rows,
+        key=lambda row: float(metrics[row["ticker"]]["three_month_return"]),
+        reverse=True,
+    )
+    rank_lookup = {row["ticker"]: index + 1 for index, row in enumerate(ranked)}
+    count = len(ranked)
+
+    output: list[dict[str, str]] = []
+    for row in equity_rows:
+        ticker = row["ticker"]
+        metric = metrics[ticker]
+        rank = rank_lookup[ticker]
+        relative_percentile = 100 if count == 1 else 100 * (count - rank) / (count - 1)
+        score = score_equity(metric, relative_percentile)
+        decision = decision_from_score(score, row["cluster"])
+        output.append(
+            {
+                "price_data_as_of": as_of,
+                "ticker": ticker,
+                "etf_name": row["etf_name"],
+                "competition_category": row["competition_category"],
+                "cluster": row["cluster"],
+                "target_weight": row["target_weight"],
+                "one_month_return": format_pct(float(metric["one_month_return"])),
+                "three_month_return": format_pct(float(metric["three_month_return"])),
+                "six_month_return": format_pct(float(metric["six_month_return"])),
+                "above_20d_ma": format_bool(bool(metric["above_20d_ma"])),
+                "above_60d_ma": format_bool(bool(metric["above_60d_ma"])),
+                "drawdown_from_60d_high": format_pct(float(metric["drawdown_from_60d_high"])),
+                "relative_rank": f"{rank}/{count}",
+                "momentum_score": f"{score:.1f}",
+                "decision": decision,
+                "opportunity": opportunity_label(decision),
+                "data_source": "Yahoo Finance chart API",
+            }
+        )
+
+    output.sort(key=lambda row: float(row["momentum_score"]), reverse=True)
+    with EQUITY_MOMENTUM_PATH.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=EQUITY_MOMENTUM_FIELDS)
+        writer.writeheader()
+        writer.writerows(output)
+
+
 def update_weekly_dashboard() -> None:
     portfolio = read_csv(PORTFOLIO_PATH)
     weekly = read_csv(WEEKLY_PATH)
     weights = {row["ticker"]: float(row["target_weight"]) for row in portfolio}
     metrics, as_of = build_price_metrics(portfolio)
+    write_equity_momentum(portfolio, metrics, as_of)
 
     computed = {
         row["cluster"]: cluster_metrics(row, weights, metrics)
@@ -289,6 +393,7 @@ def update_weekly_dashboard() -> None:
         writer.writerows(updated)
 
     print(f"updated={WEEKLY_PATH}")
+    print(f"updated={EQUITY_MOMENTUM_PATH}")
     print(f"clusters={len(updated)} price_data_as_of={as_of}")
 
 
