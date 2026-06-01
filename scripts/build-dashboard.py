@@ -401,6 +401,59 @@ def base_css(table_min_width: int = 760) -> str:
       background: rgba(255,255,255,.25);
       color: #fff;
     }}
+    .guide-btn {{
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 14px;
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+      background: #fff;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+    }}
+    .guide-btn:hover {{ background: #f8fafc; }}
+    .modal-overlay {{
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15,23,42,.45);
+      z-index: 100;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 40px 16px;
+      overflow-y: auto;
+    }}
+    .modal-overlay.open {{ display: flex; }}
+    .modal {{
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 24px 48px rgba(15,23,42,.18);
+      padding: 28px 32px;
+      max-width: 700px;
+      width: 100%;
+      position: relative;
+    }}
+    .modal h2 {{ margin: 0 0 20px; font-size: 18px; }}
+    .modal h3 {{ margin: 24px 0 8px; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }}
+    .modal table {{ min-width: unset; width: 100%; }}
+    .modal th, .modal td {{ font-size: 13px; padding: 7px 10px; white-space: normal; }}
+    .modal-close {{
+      position: absolute;
+      top: 14px;
+      right: 16px;
+      background: none;
+      border: none;
+      font-size: 22px;
+      line-height: 1;
+      cursor: pointer;
+      color: var(--muted);
+      padding: 4px;
+    }}
+    .modal-close:hover {{ color: var(--text); }}
     table {{
       width: 100%;
       border-collapse: collapse;
@@ -765,6 +818,7 @@ def render_momentum_dashboard() -> str:
         <h1>주식 모멘텀 대시보드</h1>
         <p>전체 주식 ETF {len(equity)}개 유니버스 · 가격 기준일: {esc(price_data_as_of)} · 생성: {esc(generated_at)}</p>
       </div>
+      <button class="guide-btn" onclick="openGuide()">&#9432; 열 설명</button>
     </div>
   </header>
   <main>
@@ -801,6 +855,63 @@ def render_momentum_dashboard() -> str:
       ])}
     </section>
   </main>
+  <div class="modal-overlay" id="guide-modal" onclick="if(event.target===this)closeGuide()">
+    <div class="modal">
+      <button class="modal-close" onclick="closeGuide()">&#x2715;</button>
+      <h2>열 설명</h2>
+
+      <h3>탭 필터</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>탭</th><th>점수 구간</th><th>의미</th></tr></thead>
+          <tbody>
+            <tr><td><span class="badge ok">매수/확대</span></td><td>80 이상</td><td>신규 매수 또는 비중 확대 검토</td></tr>
+            <tr><td><span class="badge neutral">보유 유지</span></td><td>65–79</td><td>현재 비중 유지</td></tr>
+            <tr><td><span class="badge warn">관찰</span></td><td>50–64</td><td>다음 업데이트까지 신규 매수 보류</td></tr>
+            <tr><td><span class="badge missing">매도/축소</span></td><td>50 미만</td><td>비중 축소 또는 교체 후보 탐색</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>테이블 열</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>열</th><th>설명</th></tr></thead>
+          <tbody>
+            <tr><td><b>판정</b></td><td>모멘텀 점수 기반 투자 행동 제안</td></tr>
+            <tr><td><b>티커</b></td><td>ETF 코드 (예: A069500)</td></tr>
+            <tr><td><b>ETF</b></td><td>ETF 이름</td></tr>
+            <tr><td><b>분류</b></td><td>국내주식_지수 / 국내주식_섹터 / 해외주식_지수 / 해외주식_섹터</td></tr>
+            <tr><td><b>클러스터</b></td><td>전략 그룹 (AI &amp; Semiconductors, Core Equity Beta 등)</td></tr>
+            <tr><td><b>1M / 3M / 6M</b></td><td>최근 1·3·6개월 수익률. 3M이 점수 산정 핵심 기준</td></tr>
+            <tr><td><b>20D</b></td><td>현재가가 20일 이동평균선 위(Y) / 아래(N) — 단기 추세</td></tr>
+            <tr><td><b>60D</b></td><td>현재가가 60일 이동평균선 위(Y) / 아래(N) — 중기 추세</td></tr>
+            <tr><td><b>60D 고점 대비</b></td><td>최근 60일 고점 대비 낙폭. 0.00%이면 현재가 = 고점</td></tr>
+            <tr><td><b>상대순위</b></td><td>전체 ETF 중 3M 수익률 기준 순위 (예: 1/130)</td></tr>
+            <tr><td><b>점수</b></td><td>0–100 모멘텀 종합 점수. 절대점수 70% + 상대순위 30%</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>점수 산정 (절대 점수 70점 만점)</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>항목</th><th>조건</th><th>점수</th></tr></thead>
+          <tbody>
+            <tr><td>1M 수익률</td><td>양수</td><td>+20</td></tr>
+            <tr><td>3M 수익률</td><td>양수</td><td>+20</td></tr>
+            <tr><td>6M 수익률</td><td>양수</td><td>+15</td></tr>
+            <tr><td>20D MA 상회</td><td>Y</td><td>+15</td></tr>
+            <tr><td>60D MA 상회</td><td>Y</td><td>+15</td></tr>
+            <tr><td rowspan="3">60D 고점 대비</td><td>–3% 이내</td><td>+15</td></tr>
+            <tr><td>–3% ~ –8%</td><td>+8</td></tr>
+            <tr><td>–8% 초과</td><td>+0</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
   <script>
     function filterDecision(btn, cls) {{
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -809,6 +920,8 @@ def render_momentum_dashboard() -> str:
         row.style.display = cls === 'all' || row.dataset.decision === cls ? '' : 'none';
       }});
     }}
+    function openGuide() {{ document.getElementById('guide-modal').classList.add('open'); }}
+    function closeGuide() {{ document.getElementById('guide-modal').classList.remove('open'); }}
   </script>
 </body>
 </html>
