@@ -210,6 +210,29 @@ def build_table(rows: list[dict[str, str]], columns: list[tuple[str, str]], clas
     """
 
 
+def build_filtered_table(rows: list[dict[str, str]], columns: list[tuple[str, str]]) -> str:
+    header = "".join(f"<th>{esc(label)}</th>" for key, label in columns)
+    body = []
+    for row in rows:
+        decision_cls = row.get("decision_class", "")
+        cells = ""
+        for key, label in columns:
+            value = row.get(key, "")
+            if key in {"decision", "opportunity"}:
+                cells += f'<td><span class="badge {esc(decision_cls)}">{esc(value)}</span></td>'
+            else:
+                cells += f"<td>{esc(value)}</td>"
+        body.append(f'<tr data-decision="{esc(decision_cls)}">{cells}</tr>')
+    return f"""
+      <div class="table-wrap">
+        <table id="ranking-table">
+          <thead><tr>{header}</tr></thead>
+          <tbody>{''.join(body)}</tbody>
+        </table>
+      </div>
+    """
+
+
 def base_css(table_min_width: int = 760) -> str:
     return f"""
     :root {{
@@ -341,6 +364,43 @@ def base_css(table_min_width: int = 760) -> str:
     .badge.missing {{ background: #fef3f2; color: var(--missing); }}
     .badge.neutral {{ background: var(--accent-soft); color: var(--accent); }}
     .table-wrap {{ overflow-x: auto; }}
+    .tabs {{
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }}
+    .tab-btn {{
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 16px;
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+      background: #fff;
+      color: #344054;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .12s, color .12s, border-color .12s;
+    }}
+    .tab-btn span {{
+      font-size: 11px;
+      background: #edf2f7;
+      color: #667085;
+      padding: 1px 7px;
+      border-radius: 999px;
+      font-weight: 700;
+    }}
+    .tab-btn.active {{
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }}
+    .tab-btn.active span {{
+      background: rgba(255,255,255,.25);
+      color: #fff;
+    }}
     table {{
       width: 100%;
       border-collapse: collapse;
@@ -673,8 +733,7 @@ def render_momentum_dashboard() -> str:
             "etf_name": row["etf_name"],
             "competition_category": row["competition_category"],
             "cluster": row["cluster"],
-            "selected": "보유" if row.get("selected") == "Y" else "미보유",
-            "target_weight": fmt_weight(row["target_weight"]),
+            "selected": "보유" if row.get("selected") == "Y" else "-",
             "one_month_return": row["one_month_return"],
             "three_month_return": row["three_month_return"],
             "six_month_return": row["six_month_return"],
@@ -688,18 +747,13 @@ def render_momentum_dashboard() -> str:
         }
 
     ranked_rows = [row_view(row) for row in sorted(equity, key=lambda row: parse_score(row["momentum_score"]), reverse=True)]
-    buy_rows = [row_view(row) for row in sorted(add_rows, key=lambda row: parse_score(row["momentum_score"]), reverse=True)[:12]]
-    sell_rows = [row_view(row) for row in sorted(cut_rows, key=lambda row: parse_score(row["momentum_score"]))[:12]]
-
-    best = ranked_rows[0] if ranked_rows else {}
-    weakest = ranked_rows[-1] if ranked_rows else {}
 
     return f"""<!doctype html>
 <html lang="ko">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>DB GAPS 주식 모멘텀 대시보드</title>
+  <title>DB GAPS 주식 모멘텀</title>
   <style>
 {base_css(920)}
   </style>
@@ -709,79 +763,34 @@ def render_momentum_dashboard() -> str:
     <div class="hero">
       <div class="hero-copy">
         <h1>주식 모멘텀 대시보드</h1>
-        <p>ETF 리스트에 포함된 전체 주식 ETF 유니버스의 모멘텀을 봅니다. 가격 데이터 기준일: {esc(price_data_as_of)}. 생성 시각: {esc(generated_at)}.</p>
+        <p>전체 주식 ETF {len(equity)}개 유니버스 · 가격 기준일: {esc(price_data_as_of)} · 생성: {esc(generated_at)}</p>
       </div>
-      <nav class="nav-pills" aria-label="dashboard navigation">
-        <a href="index.html">종합</a>
-        <a class="active" href="momentum.html">주식 모멘텀</a>
-      </nav>
     </div>
   </header>
   <main>
     <section class="cards" aria-label="Momentum summary">
-      <div class="card"><div class="label">확대 후보</div><div class="value safe">{len(add_rows)}</div></div>
-      <div class="card"><div class="label">유지</div><div class="value neutral">{len(hold_rows)}</div></div>
+      <div class="card"><div class="label">매수/확대 후보</div><div class="value safe">{len(add_rows)}</div></div>
+      <div class="card"><div class="label">보유 유지</div><div class="value neutral">{len(hold_rows)}</div></div>
       <div class="card"><div class="label">관찰</div><div class="value warn">{len(watch_rows)}</div></div>
-      <div class="card"><div class="label">축소 후보</div><div class="value risk">{len(cut_rows)}</div></div>
-      <div class="card"><div class="label">전체 주식 ETF</div><div class="value">{len(equity)}</div></div>
-    </section>
-
-    <section class="grid-2">
-      <div class="panel panel-ok">
-        <h2>가장 강한 모멘텀</h2>
-        <p>{esc(best.get("ticker", "-"))} · {esc(best.get("etf_name", "-"))}</p>
-        <p>점수 {esc(best.get("momentum_score") or "-")}, 3M {esc(best.get("three_month_return") or "-")}, 60D 고점 대비 {esc(best.get("drawdown_from_60d_high") or "-")}</p>
-      </div>
-      <div class="panel panel-risk">
-        <h2>가장 약한 모멘텀</h2>
-        <p>{esc(weakest.get("ticker", "-"))} · {esc(weakest.get("etf_name", "-"))}</p>
-        <p>점수 {esc(weakest.get("momentum_score") or "-")}, 3M {esc(weakest.get("three_month_return") or "-")}, 60D 고점 대비 {esc(weakest.get("drawdown_from_60d_high") or "-")}</p>
-      </div>
-    </section>
-
-    <section class="guide">
-      <div class="panel guide-ok"><b>확대 후보</b>점수 80 이상. 카테고리 한도와 기존 비중을 확인한 뒤 증액 검토.</div>
-      <div class="panel guide-warn"><b>관찰 후보</b>점수 50-64. 다음 주 업데이트 전까지 신규 매수 보류.</div>
-      <div class="panel guide-risk"><b>축소 후보</b>점수 50 미만. 추세 이탈과 낙폭이 겹치면 교체 후보 탐색.</div>
-    </section>
-
-    <section class="grid-2">
-      <div>
-        <h2>매수/확대 후보 Top 12</h2>
-        {build_table(buy_rows, [
-          ("opportunity", "판정"),
-          ("ticker", "티커"),
-          ("etf_name", "ETF"),
-          ("selected", "보유"),
-          ("three_month_return", "3M"),
-          ("above_60d_ma", "60D 상회"),
-          ("momentum_score", "점수"),
-        ])}
-      </div>
-      <div>
-        <h2>매도/축소 후보 Top 12</h2>
-        {build_table(sell_rows, [
-          ("opportunity", "판정"),
-          ("ticker", "티커"),
-          ("etf_name", "ETF"),
-          ("selected", "보유"),
-          ("one_month_return", "1M"),
-          ("drawdown_from_60d_high", "60D 고점 대비"),
-          ("momentum_score", "점수"),
-        ])}
-      </div>
+      <div class="card"><div class="label">매도/축소 후보</div><div class="value risk">{len(cut_rows)}</div></div>
+      <div class="card"><div class="label">전체</div><div class="value">{len(equity)}</div></div>
     </section>
 
     <section>
-      <h2>주식 ETF 모멘텀 랭킹</h2>
-      {build_table(ranked_rows, [
+      <div class="tabs" role="tablist">
+        <button class="tab-btn active" onclick="filterDecision(this,'all')">전체 <span>{len(equity)}</span></button>
+        <button class="tab-btn" onclick="filterDecision(this,'ok')">매수/확대 <span>{len(add_rows)}</span></button>
+        <button class="tab-btn" onclick="filterDecision(this,'neutral')">보유 유지 <span>{len(hold_rows)}</span></button>
+        <button class="tab-btn" onclick="filterDecision(this,'warn')">관찰 <span>{len(watch_rows)}</span></button>
+        <button class="tab-btn" onclick="filterDecision(this,'missing')">매도/축소 <span>{len(cut_rows)}</span></button>
+      </div>
+      {build_filtered_table(ranked_rows, [
         ("opportunity", "판정"),
         ("ticker", "티커"),
         ("etf_name", "ETF"),
         ("competition_category", "분류"),
         ("cluster", "클러스터"),
         ("selected", "보유"),
-        ("target_weight", "현재 비중"),
         ("one_month_return", "1M"),
         ("three_month_return", "3M"),
         ("six_month_return", "6M"),
@@ -793,6 +802,15 @@ def render_momentum_dashboard() -> str:
       ])}
     </section>
   </main>
+  <script>
+    function filterDecision(btn, cls) {{
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('#ranking-table tbody tr').forEach(row => {{
+        row.style.display = cls === 'all' || row.dataset.decision === cls ? '' : 'none';
+      }});
+    }}
+  </script>
 </body>
 </html>
 """
@@ -800,10 +818,8 @@ def render_momentum_dashboard() -> str:
 
 def main() -> None:
     PUBLIC_DIR.mkdir(exist_ok=True)
-    OUTPUT_PATH.write_text(render_dashboard(), encoding="utf-8")
-    MOMENTUM_OUTPUT_PATH.write_text(render_momentum_dashboard(), encoding="utf-8")
+    OUTPUT_PATH.write_text(render_momentum_dashboard(), encoding="utf-8")
     print(f"wrote={OUTPUT_PATH}")
-    print(f"wrote={MOMENTUM_OUTPUT_PATH}")
 
 
 if __name__ == "__main__":
