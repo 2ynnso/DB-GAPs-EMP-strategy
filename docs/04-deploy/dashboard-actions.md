@@ -80,4 +80,12 @@ The workflow fails if:
 
 ## Operational Note
 
-The dashboard displays repository data. It does not fetch live prices, flows, or macro data. Weekly momentum and flow fields should be updated in the CSV files before pushing if the team wants the dashboard to reflect current operating signals.
+The dashboard displays repository data. It does not fetch live prices, flows, or macro data.
+
+Current momentum behavior:
+
+- If 1M/3M/6M return and trend fields are empty, the dashboard shows `모멘텀 미입력`.
+- If some fields are filled, it shows `일부 업데이트 필요`.
+- If all required weekly fields are filled, it shows `업데이트 완료`.
+
+Weekly momentum and flow fields should be updated in `framework/weekly-monitoring-dashboard.csv` before pushing if the team wants the dashboard to reflect current operating signals.

@@ -32,11 +32,138 @@ def esc(value: object) -> str:
     return html.escape(str(value), quote=True)
 
 
+BUCKET_LABELS = {
+    "Risk": "위험자산",
+    "Safe": "안전자산",
+}
+
+DECISION_LABELS = {
+    "Add": "확대",
+    "Hold": "유지",
+    "Watch": "관찰",
+    "Cut": "축소",
+}
+
+CLUSTER_NOTES = {
+    "AI & Semiconductors": "핵심 수익 엔진. AI 설비투자와 반도체 사이클 확인 필요.",
+    "AI Power Infrastructure": "AI 데이터센터 전력 인프라 수혜 후보.",
+    "Korea Cyclical Alpha": "한국 수출, 조선, 방산 모멘텀 점검 대상.",
+    "Core Equity Beta": "한국/미국 핵심 지수 노출.",
+    "Commodity Hedge": "지정학 및 인플레이션 헤지. 유가 뉴스 확인 필요.",
+    "Short-Duration Safety": "변동성 완충 및 리밸런싱 재원.",
+    "Domestic Carry": "국내 단기채와 우량채 캐리. BOK 확인 필요.",
+    "USD Safety": "달러 단기채 완충. USD/KRW와 미국 금리 확인 필요.",
+}
+
+THESIS_KO = {
+    "A069500": "반도체 중심 코스피 이익 모멘텀",
+    "A395160": "국내 AI 반도체와 HBM 직접 노출",
+    "A466920": "수출과 방산 인접 조선 업황 수혜",
+    "A449450": "지정학 리스크와 방산 정책 수요",
+    "A360750": "미국 대형 우량주와 이익 모멘텀",
+    "A133690": "AI 플랫폼과 미국 성장주 노출",
+    "A497570": "미국 AI 반도체 밸류체인",
+    "A487230": "AI 데이터센터 전력 인프라 수혜",
+    "A411060": "지정학과 인플레이션 헤지",
+    "A261220": "유가 급등과 호르무즈 리스크 헤지",
+    "A459580": "고유동성 CD금리형 현금성 자산",
+    "A423160": "KOFR 연동 초단기 변동성 완충",
+    "A157450": "짧은 듀레이션 국내 안전자산",
+    "A114260": "제한적 듀레이션 국고채 노출",
+    "A273130": "AA- 이상 우량채 캐리",
+    "A329750": "달러 단기채와 환율 완충",
+}
+
+TRIGGER_KO = {
+    "A069500": "외국인 수급이 2주 연속 약화되면 축소 검토",
+    "A395160": "섹터 수급과 1개월 모멘텀이 개선되면 확대 검토",
+    "A466920": "상대순위가 하위 30%로 하락하면 축소",
+    "A449450": "지정학 프리미엄 약화와 추세 이탈 동시 발생 시 축소",
+    "A360750": "AI 모멘텀 강화 시 일부를 테마 ETF 확대 재원으로 사용",
+    "A133690": "Fed 매파 충격이 성장주에 부담이면 축소",
+    "A497570": "7월 실적/AI capex 가이던스 훼손 시 축소",
+    "A487230": "AI capex 사이클이 유지되면 보유",
+    "A411060": "위험자산 강세가 확인되면 일부 축소",
+    "A261220": "종전 또는 호르무즈 재개방 확인 시 청산",
+    "A459580": "Fed/BOK 매파 충격 시 확대",
+    "A423160": "위험 클러스터 점수 50 미만 시 확대",
+    "A157450": "더 나은 초단기 대안이 없으면 유지",
+    "A114260": "BOK 인상 신호 강화 시 축소",
+    "A273130": "크레딧 스프레드 확대 시 축소",
+    "A329750": "달러 헤지 필요성이 유지되면 보유",
+}
+
+ACTION_KO = {
+    "Update signals weekly": "주간 수익률, 추세, 수급 값 입력 필요",
+    "Update oil and gold thesis weekly": "유가, 금, 지정학 뉴스 주간 점검 필요",
+    "Use as rebalance source or risk buffer": "리밸런싱 재원 또는 위험 완충으로 활용",
+    "Watch BOK and credit spreads": "BOK 결정과 크레딧 스프레드 확인",
+    "Watch USD/KRW and US rate shock": "USD/KRW와 미국 금리 충격 확인",
+}
+
+
+def bucket_label(value: str) -> str:
+    return BUCKET_LABELS.get(value, value)
+
+
+def decision_label(value: str) -> str:
+    return DECISION_LABELS.get(value, value or "미정")
+
+
+def action_label(value: str) -> str:
+    return ACTION_KO.get(value, value or "업데이트 필요")
+
+
+def empty(value: str | None) -> bool:
+    return value is None or value.strip() == ""
+
+
+def momentum_status(row: dict[str, str]) -> str:
+    fields = [
+        "one_month_return",
+        "three_month_return",
+        "six_month_return",
+        "above_20d_ma",
+        "above_60d_ma",
+        "drawdown_from_60d_high",
+        "relative_rank",
+        "cluster_score",
+    ]
+    if all(empty(row.get(field)) for field in fields):
+        return "모멘텀 미입력"
+    if any(empty(row.get(field)) for field in fields):
+        return "일부 업데이트 필요"
+    return "업데이트 완료"
+
+
+def dashboard_status(weekly: list[dict[str, str]]) -> tuple[str, str]:
+    statuses = [momentum_status(row) for row in weekly]
+    if all(status == "업데이트 완료" for status in statuses):
+        return "모멘텀 확인 완료", "주간 모멘텀과 추세 필드가 모두 입력되어 있습니다."
+    if any(status == "일부 업데이트 필요" for status in statuses):
+        return "모멘텀 일부 확인", "일부 클러스터의 수익률, 추세, 점수 필드가 비어 있습니다."
+    return "모멘텀 미확인", "현재 CSV에는 1M/3M/6M 수익률과 추세 값이 비어 있습니다. 대시보드는 자동 가격 데이터를 가져오지 않습니다."
+
+
+def status_class(status: str) -> str:
+    if status == "업데이트 완료":
+        return "ok"
+    if status == "일부 업데이트 필요":
+        return "warn"
+    return "missing"
+
+
 def build_table(rows: list[dict[str, str]], columns: list[tuple[str, str]], class_name: str = "") -> str:
     header = "".join(f"<th>{esc(label)}</th>" for key, label in columns)
     body = []
     for row in rows:
-        cells = "".join(f"<td>{esc(row.get(key, ''))}</td>" for key, label in columns)
+        cells = ""
+        for key, label in columns:
+            value = row.get(key, "")
+            if key == "momentum_status":
+                cells += f'<td><span class="badge {esc(row.get("status_class", ""))}">{esc(value)}</span></td>'
+            else:
+                cells += f"<td>{esc(value)}</td>"
         body.append(f"<tr>{cells}</tr>")
     return f"""
       <div class="table-wrap {class_name}">
@@ -108,6 +235,9 @@ def render_dashboard() -> str:
     summary = allocation_summary(portfolio)
     selected = [row for row in etf_master if row["selected"] == "Y"]
     generated_at = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    status_title, status_detail = dashboard_status(weekly)
+    monitoring_ready = sum(1 for row in weekly if momentum_status(row) == "업데이트 완료")
+    monitoring_total = len(weekly)
 
     category_rows = category_summary(portfolio)
     cluster_rows = cluster_summary(portfolio)
@@ -116,11 +246,13 @@ def render_dashboard() -> str:
         {
             "ticker": row["ticker"],
             "etf_name": row["etf_name"],
-            "asset_bucket": row["asset_bucket"],
+            "asset_bucket": bucket_label(row["asset_bucket"]),
             "competition_category": row["competition_category"],
             "cluster": row["cluster"],
             "target_weight": fmt_weight(row["target_weight"]),
             "role": row["role"],
+            "thesis": THESIS_KO.get(row["ticker"], row["thesis"]),
+            "action_trigger": TRIGGER_KO.get(row["ticker"], row["action_trigger"]),
         }
         for row in portfolio
     ]
@@ -142,9 +274,11 @@ def render_dashboard() -> str:
             "cluster": row["cluster"],
             "held_tickers": row["held_tickers"],
             "target_weight": fmt_weight(row["target_weight"]),
-            "decision": row["decision"],
-            "proposed_action": row["proposed_action"],
-            "notes": row["notes"],
+            "momentum_status": momentum_status(row),
+            "decision": decision_label(row["decision"]),
+            "proposed_action": action_label(row["proposed_action"]),
+            "notes": row["notes"] or CLUSTER_NOTES.get(row["cluster"], ""),
+            "status_class": status_class(momentum_status(row)),
         }
         for row in weekly
     ]
@@ -170,14 +304,17 @@ def render_dashboard() -> str:
   <style>
     :root {{
       color-scheme: light;
-      --bg: #f7f8fa;
+      --bg: #f5f6f8;
       --panel: #ffffff;
       --text: #151923;
       --muted: #687386;
       --line: #d9dee7;
-      --accent: #174ea6;
+      --accent: #1f5f99;
       --risk: #b42318;
       --safe: #067647;
+      --warn: #b54708;
+      --missing: #7a271a;
+      --soft: #eef4ff;
     }}
     * {{ box-sizing: border-box; }}
     body {{
@@ -187,8 +324,8 @@ def render_dashboard() -> str:
       font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }}
     header {{
-      padding: 28px 24px 18px;
-      background: #fff;
+      padding: 30px 24px 22px;
+      background: linear-gradient(180deg, #ffffff 0%, #eef4ff 100%);
       border-bottom: 1px solid var(--line);
     }}
     main {{
@@ -200,7 +337,7 @@ def render_dashboard() -> str:
       margin: 0;
       line-height: 1.2;
     }}
-    h1 {{ font-size: 28px; }}
+    h1 {{ font-size: 28px; letter-spacing: 0; }}
     h2 {{ font-size: 18px; margin-bottom: 12px; }}
     p {{ margin: 8px 0 0; color: var(--muted); }}
     section {{ margin-bottom: 24px; }}
@@ -213,6 +350,21 @@ def render_dashboard() -> str:
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 12px;
     }}
+    .status-panel {{
+      display: grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap: 16px;
+      margin-bottom: 20px;
+    }}
+    .panel {{
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }}
+    .panel strong {{ display: block; font-size: 20px; margin-bottom: 6px; }}
+    .panel ul {{ margin: 12px 0 0; padding-left: 18px; color: var(--muted); }}
+    .panel li {{ margin: 4px 0; }}
     .card {{
       background: var(--panel);
       border: 1px solid var(--line);
@@ -232,6 +384,18 @@ def render_dashboard() -> str:
     }}
     .risk {{ color: var(--risk); }}
     .safe {{ color: var(--safe); }}
+    .badge {{
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      background: #edf2f7;
+      color: #344054;
+    }}
+    .badge.ok {{ background: #ecfdf3; color: var(--safe); }}
+    .badge.warn {{ background: #fffaeb; color: var(--warn); }}
+    .badge.missing {{ background: #fef3f2; color: var(--missing); }}
     .table-wrap {{
       overflow-x: auto;
       background: var(--panel);
@@ -248,7 +412,7 @@ def render_dashboard() -> str:
       border-bottom: 1px solid var(--line);
       text-align: left;
       vertical-align: top;
-      white-space: nowrap;
+      white-space: normal;
     }}
     th {{
       background: #f0f3f8;
@@ -267,10 +431,23 @@ def render_dashboard() -> str:
       font-size: 13px;
       margin-top: 8px;
     }}
+    .priority {{
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }}
+    .priority-item {{
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+    }}
+    .priority-item b {{ display: block; margin-bottom: 4px; }}
     @media (max-width: 840px) {{
       header {{ padding: 22px 16px 14px; }}
       main {{ padding: 16px; }}
-      .cards, .grid-2 {{ grid-template-columns: 1fr; }}
+      .cards, .grid-2, .status-panel, .priority {{ grid-template-columns: 1fr; }}
       h1 {{ font-size: 24px; }}
     }}
   </style>
@@ -278,76 +455,98 @@ def render_dashboard() -> str:
 <body>
   <header>
     <div class="hero">
-      <h1>DB GAPS EMP Dashboard</h1>
-      <p>ETF Managed Portfolio framework for June-August 2026. Generated by GitHub Actions at {esc(generated_at)}.</p>
+      <h1>DB GAPS EMP 운용 대시보드</h1>
+      <p>2026년 6-8월 ETF EMP 전략 현황입니다. GitHub Actions 생성 시각: {esc(generated_at)}.</p>
     </div>
   </header>
   <main>
+    <section class="status-panel" aria-label="현재 상황">
+      <div class="panel">
+        <strong>현재 상황: 기준 포트폴리오 구축 완료, 모멘텀 데이터 업데이트 필요</strong>
+        <p>초기 포트폴리오는 위험자산 70%, 안전자산 30%로 제약 조건을 통과했습니다. 다만 주간 모멘텀 값은 아직 CSV에 입력되지 않았으므로 현재 화면은 가격 모멘텀을 자동 확인한 결과가 아닙니다.</p>
+        <div class="priority">
+          <div class="priority-item"><b>1. 먼저 확인</b>1M/3M/6M 수익률, 20D/60D 추세</div>
+          <div class="priority-item"><b>2. 다음 확인</b>외국인/기관 수급, USD/KRW, 유가</div>
+          <div class="priority-item"><b>3. 행동 판단</b>확대/유지/관찰/축소로 클러스터 판정</div>
+        </div>
+      </div>
+      <div class="panel">
+        <strong>{esc(status_title)}</strong>
+        <p>{esc(status_detail)}</p>
+        <ul>
+          <li>모니터링 완료 클러스터: {monitoring_ready}/{monitoring_total}</li>
+          <li>대시보드는 repository CSV 기준으로만 표시됩니다.</li>
+        </ul>
+      </div>
+    </section>
+
     <section class="cards" aria-label="Portfolio summary">
-      <div class="card"><div class="label">Risk Assets</div><div class="value risk">{fmt_weight(summary["Risk"])}</div></div>
-      <div class="card"><div class="label">Safe Assets</div><div class="value safe">{fmt_weight(summary["Safe"])}</div></div>
-      <div class="card"><div class="label">Total Weight</div><div class="value">{fmt_weight(summary["Total"])}</div></div>
-      <div class="card"><div class="label">ETF Universe</div><div class="value">{len(etf_master)}</div></div>
+      <div class="card"><div class="label">위험자산</div><div class="value risk">{fmt_weight(summary["Risk"])}</div></div>
+      <div class="card"><div class="label">안전자산</div><div class="value safe">{fmt_weight(summary["Safe"])}</div></div>
+      <div class="card"><div class="label">총 비중</div><div class="value">{fmt_weight(summary["Total"])}</div></div>
+      <div class="card"><div class="label">ETF 유니버스</div><div class="value">{len(etf_master)}</div></div>
     </section>
 
     <section>
-      <h2>Initial Portfolio</h2>
+      <h2>초기 포트폴리오</h2>
       {build_table(portfolio_rows, [
-        ("ticker", "Ticker"),
+        ("ticker", "티커"),
         ("etf_name", "ETF"),
-        ("asset_bucket", "Bucket"),
-        ("competition_category", "Category"),
-        ("cluster", "Cluster"),
-        ("target_weight", "Weight"),
-        ("role", "Role"),
+        ("asset_bucket", "자산구분"),
+        ("competition_category", "대회분류"),
+        ("cluster", "전략 클러스터"),
+        ("target_weight", "비중"),
+        ("thesis", "편입 논리"),
+        ("action_trigger", "점검 트리거"),
       ])}
     </section>
 
     <section class="grid-2">
       <div>
-        <h2>Cluster Weights</h2>
-        {build_table(cluster_rows, [("cluster", "Cluster"), ("weight", "Weight")])}
+        <h2>클러스터별 비중</h2>
+        {build_table(cluster_rows, [("cluster", "전략 클러스터"), ("weight", "비중")])}
       </div>
       <div>
-        <h2>Category Usage</h2>
-        {build_table(category_rows, [("category", "Category"), ("weight", "Weight")])}
+        <h2>대회 분류별 사용 현황</h2>
+        {build_table(category_rows, [("category", "대회분류"), ("weight", "비중")])}
       </div>
     </section>
 
     <section>
-      <h2>Selected ETF Master</h2>
+      <h2>선정 ETF 상세</h2>
       {build_table(selected_rows, [
-        ("ticker", "Ticker"),
+        ("ticker", "티커"),
         ("etf_name", "ETF"),
         ("aum_krw_100m", "AUM(억원)"),
-        ("cluster", "Cluster"),
-        ("same_exposure_group", "Exposure Group"),
-        ("target_weight", "Weight"),
+        ("cluster", "전략 클러스터"),
+        ("same_exposure_group", "동일 노출 그룹"),
+        ("target_weight", "비중"),
       ])}
-      <div class="note">Full 188-row ETF master is stored at framework/etf-master.csv.</div>
+      <div class="note">전체 188개 ETF master는 framework/etf-master.csv에 저장되어 있습니다.</div>
     </section>
 
     <section>
-      <h2>Weekly Monitoring</h2>
+      <h2>주간 모니터링 현황</h2>
       {build_table(weekly_rows, [
-        ("cluster", "Cluster"),
-        ("held_tickers", "Held Tickers"),
-        ("target_weight", "Target"),
-        ("decision", "Decision"),
-        ("proposed_action", "Action"),
-        ("notes", "Notes"),
+        ("cluster", "전략 클러스터"),
+        ("held_tickers", "보유 티커"),
+        ("target_weight", "목표 비중"),
+        ("momentum_status", "모멘텀 상태"),
+        ("decision", "판정"),
+        ("proposed_action", "필요 행동"),
+        ("notes", "메모"),
       ])}
     </section>
 
     <section>
-      <h2>Rebalance Log</h2>
+      <h2>리밸런싱 로그</h2>
       {build_table(rebalance_rows, [
-        ("rebalance_date", "Date"),
-        ("previous_total_risk", "Previous Risk"),
-        ("new_total_risk", "New Risk"),
-        ("turnover", "Turnover"),
-        ("trigger", "Trigger"),
-        ("result", "Result"),
+        ("rebalance_date", "일자"),
+        ("previous_total_risk", "기존 위험자산"),
+        ("new_total_risk", "신규 위험자산"),
+        ("turnover", "회전율"),
+        ("trigger", "트리거"),
+        ("result", "결과"),
       ])}
     </section>
   </main>

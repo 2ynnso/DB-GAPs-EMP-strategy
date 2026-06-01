@@ -109,6 +109,16 @@ Design-to-implementation match rate: 100% after ETF master implementation.
 
 The dashboard is generated from the CSV files and deployed through GitHub Actions.
 
+The dashboard UI is Korean-first and shows:
+
+- Current portfolio state.
+- Whether momentum data is entered or still missing.
+- Risk/safe split.
+- Cluster and category usage.
+- Weekly monitoring actions.
+
+Important: the dashboard does not fetch live prices yet. The weekly momentum fields in `framework/weekly-monitoring-dashboard.csv` must be updated for the dashboard to show confirmed momentum status.
+
 Local build:
 
 ```bash
