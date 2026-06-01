@@ -1,0 +1,15 @@
+.DS_Store
+**/.DS_Store
+
+# Local/editor files
+.vscode/
+.idea/
+*.swp
+
+# Python/cache artifacts
+__pycache__/
+*.py[cod]
+
+# Temporary exports
+~$*
+*.tmp

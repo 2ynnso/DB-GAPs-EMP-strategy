@@ -1,0 +1,2 @@
+rebalance_date,previous_total_risk,new_total_risk,turnover,trigger,from_ticker,from_weight,to_ticker,to_weight,constraint_check,result,notes
+2026-06-01,0,70,100,Initial allocation,Cash,100,Model portfolio,100,Pass,Executed,Initial five-business-day turnover requirement should be satisfied by full allocation

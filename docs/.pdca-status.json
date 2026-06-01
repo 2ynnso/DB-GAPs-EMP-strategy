@@ -1,0 +1,143 @@
+{
+  "version": "2.0",
+  "lastUpdated": "2026-06-01T06:01:13.427Z",
+  "activeFeatures": [
+    "db-gaps-emp-framework"
+  ],
+  "primaryFeature": "db-gaps-emp-framework",
+  "features": {
+    "db-gaps-emp-framework": {
+      "phase": "completed",
+      "matchRate": null,
+      "iterationCount": 1,
+      "documents": {},
+      "taskChain": [
+        {
+          "phase": "plan",
+          "status": "completed",
+          "createdAt": "2026-05-31T11:56:09.597Z",
+          "completedAt": "2026-05-31T11:57:22.037Z"
+        },
+        {
+          "phase": "design",
+          "status": "completed",
+          "createdAt": "2026-05-31T11:56:09.597Z",
+          "completedAt": "2026-06-01T05:55:12.611Z"
+        },
+        {
+          "phase": "do",
+          "status": "completed",
+          "createdAt": "2026-05-31T11:56:09.597Z",
+          "completedAt": "2026-06-01T05:59:42.293Z"
+        },
+        {
+          "phase": "check",
+          "status": "completed",
+          "createdAt": "2026-05-31T11:56:09.597Z",
+          "completedAt": "2026-06-01T06:00:34.911Z"
+        },
+        {
+          "phase": "report",
+          "status": "completed",
+          "createdAt": "2026-05-31T11:56:09.597Z",
+          "completedAt": "2026-06-01T06:01:13.427Z"
+        }
+      ],
+      "timestamps": {
+        "started": "2026-05-31T11:56:09.597Z",
+        "lastUpdated": "2026-06-01T06:01:13.427Z"
+      },
+      "completedAt": "2026-06-01T06:01:13.426Z"
+    }
+  },
+  "pipeline": {
+    "currentPhase": 1,
+    "level": "Starter",
+    "phaseHistory": []
+  },
+  "session": {
+    "startedAt": "2026-05-31T11:56:09.594Z",
+    "onboardingCompleted": false,
+    "lastActivity": "2026-06-01T06:01:13.427Z"
+  },
+  "history": [
+    {
+      "feature": "db-gaps-emp-framework",
+      "from": "plan",
+      "to": "design",
+      "timestamp": "2026-05-31T11:57:22.035Z"
+    },
+    {
+      "feature": "db-gaps-emp-framework",
+      "action": "phase_complete",
+      "phase": "plan",
+      "nextPhase": "design",
+      "timestamp": "2026-05-31T11:57:22.036Z"
+    },
+    {
+      "feature": "db-gaps-emp-framework",
+      "from": "design",
+      "to": "design",
+      "timestamp": "2026-06-01T05:51:08.928Z"
+    },
+    {
+      "feature": "db-gaps-emp-framework",
+      "from": "design",
+      "to": "do",
+      "timestamp": "2026-06-01T05:55:12.610Z"
+    },
+    {
+      "feature": "db-gaps-emp-framework",
+      "action": "phase_complete",
+      "phase": "design",
+      "nextPhase": "do",
+      "timestamp": "2026-06-01T05:55:12.610Z"
+    },
+    {
+      "feature": "db-gaps-emp-framework",
+      "from": "do",
+      "to": "check",
+      "timestamp": "2026-06-01T05:59:42.292Z"
+    },
+    {
+      "feature": "db-gaps-emp-framework",
+      "action": "phase_complete",
+      "phase": "do",
+      "nextPhase": "check",
+      "timestamp": "2026-06-01T05:59:42.292Z"
+    },
+    {
+      "feature": "db-gaps-emp-framework",
+      "from": "check",
+      "to": "act",
+      "timestamp": "2026-06-01T06:00:34.909Z"
+    },
+    {
+      "feature": "db-gaps-emp-framework",
+      "action": "phase_complete",
+      "phase": "check",
+      "nextPhase": "act",
+      "timestamp": "2026-06-01T06:00:34.910Z"
+    },
+    {
+      "feature": "db-gaps-emp-framework",
+      "from": "act",
+      "to": "report",
+      "timestamp": "2026-06-01T06:01:13.421Z"
+    },
+    {
+      "feature": "db-gaps-emp-framework",
+      "action": "phase_complete",
+      "phase": "act",
+      "nextPhase": "report",
+      "timestamp": "2026-06-01T06:01:13.421Z"
+    },
+    {
+      "feature": "db-gaps-emp-framework",
+      "action": "phase_complete",
+      "phase": "report",
+      "nextPhase": "completed",
+      "timestamp": "2026-06-01T06:01:13.426Z"
+    }
+  ]
+}

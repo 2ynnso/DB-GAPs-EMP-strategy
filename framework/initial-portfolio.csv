@@ -1,0 +1,17 @@
+as_of,asset_bucket,competition_category,ticker,etf_name,cluster,target_weight,role,thesis,action_trigger
+2026-06-01,Risk,국내주식_지수,A069500,KODEX 200,Core Equity Beta,10,Core Korea beta,Semiconductor-led KOSPI earnings momentum,Trim if Korea foreign flow weakens for 2 weeks
+2026-06-01,Risk,국내주식_섹터,A395160,KODEX AI반도체,AI & Semiconductors,8,Core thematic,Direct Korea AI semiconductor and HBM exposure,Add if sector flow and 1M momentum improve
+2026-06-01,Risk,국내주식_섹터,A466920,SOL 조선TOP3플러스,Korea Cyclical Alpha,4,Satellite thematic,Export and defense-adjacent order-cycle alpha,Cut if relative rank falls to bottom 30%
+2026-06-01,Risk,국내주식_섹터,A449450,PLUS K방산,Korea Cyclical Alpha,3,Satellite thematic,Geopolitical premium and policy demand,Cut if geopolitical premium fades and trend breaks
+2026-06-01,Risk,해외주식_지수,A360750,TIGER 미국S&P500,Core Equity Beta,13,Core US beta,Broad US quality and earnings exposure,Fund source for AI add if capex momentum strengthens
+2026-06-01,Risk,해외주식_지수,A133690,TIGER 미국나스닥100,AI & Semiconductors,12,Core growth,AI platform and growth exposure,Trim if Fed hawkish shock hits duration-sensitive growth
+2026-06-01,Risk,해외주식_섹터,A497570,TIGER 미국필라델피아AI반도체나스닥,AI & Semiconductors,6,Core thematic,US AI semiconductor supply chain,Cut if July earnings/capex guidance disappoints
+2026-06-01,Risk,해외주식_섹터,A487230,KODEX 미국AI전력핵심인프라,AI Power Infrastructure,4,Satellite thematic,AI data-center power infrastructure,Hold while AI capex cycle remains intact
+2026-06-01,Risk,FX 및 원자재,A411060,ACE KRX금현물,Commodity Hedge,6,Hedge,Geopolitical and inflation hedge,Trim in bull reflation if risk assets confirm
+2026-06-01,Risk,FX 및 원자재,A261220,KODEX WTI원유선물(H),Commodity Hedge,4,Tactical hedge,Hormuz and oil shock hedge,Exit on confirmed ceasefire or Hormuz reopening
+2026-06-01,Safe,금리연계형/초단기채권,A459580,KODEX CD금리액티브(합성),Short-Duration Safety,8,Core safety,High-liquidity rate-linked cash proxy,Add if Fed or BOK hawkish shock occurs
+2026-06-01,Safe,금리연계형/초단기채권,A423160,KODEX KOFR금리액티브(합성),Short-Duration Safety,5,Core safety,Overnight-rate linked volatility buffer,Add if risk cluster score falls below 50
+2026-06-01,Safe,국내채권_종합,A157450,TIGER 단기통안채,Domestic Carry,4,Short-duration bond,Short-duration domestic safety,Hold unless short-rate alternative improves
+2026-06-01,Safe,국내채권_종합,A114260,KODEX 국고채3년,Domestic Carry,3,Limited duration,KTB exposure with controlled duration,Cut on BOK hike signal
+2026-06-01,Safe,국내채권_회사채,A273130,KODEX 종합채권(AA-이상)액티브,Domestic Carry,6,High-grade carry,AA- or higher carry exposure,Trim if credit spread widens materially
+2026-06-01,Safe,해외채권_종합,A329750,TIGER 미국달러단기채권액티브,USD Safety,4,USD safety,USD short-bond liquidity and currency buffer,Hold while USD risk hedge is useful

@@ -1,0 +1,9 @@
+week_start,cluster,held_tickers,target_weight,current_weight,one_month_return,three_month_return,six_month_return,above_20d_ma,above_60d_ma,drawdown_from_60d_high,relative_rank,flow_signal,macro_signal,cluster_score,decision,proposed_action,notes
+2026-06-01,AI & Semiconductors,"A395160;A133690;A497570",26,,,,,,,,,,,,Hold,Update signals weekly,
+2026-06-01,AI Power Infrastructure,A487230,4,,,,,,,,,,,,Hold,Update signals weekly,
+2026-06-01,Korea Cyclical Alpha,"A466920;A449450",7,,,,,,,,,,,,Hold,Update signals weekly,
+2026-06-01,Core Equity Beta,"A069500;A360750",23,,,,,,,,,,,,Hold,Update signals weekly,
+2026-06-01,Commodity Hedge,"A411060;A261220",10,,,,,,,,,,,,Hold,Update oil and gold thesis weekly,
+2026-06-01,Short-Duration Safety,"A459580;A423160",13,,,,,,,,,,,,Hold,Use as rebalance source or risk buffer,
+2026-06-01,Domestic Carry,"A157450;A114260;A273130",13,,,,,,,,,,,,Hold,Watch BOK and credit spreads,
+2026-06-01,USD Safety,A329750,4,,,,,,,,,,,,Hold,Watch USD/KRW and US rate shock,
