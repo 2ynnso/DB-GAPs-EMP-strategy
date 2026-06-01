@@ -350,9 +350,10 @@ def base_css(table_min_width: int = 760) -> str:
       padding: 10px 12px;
       border-bottom: 1px solid var(--line);
       text-align: left;
-      vertical-align: top;
-      white-space: normal;
+      vertical-align: middle;
+      white-space: nowrap;
     }}
+    td.wrap {{ white-space: normal; }}
     th {{
       position: sticky;
       top: 0;
@@ -382,6 +383,12 @@ def base_css(table_min_width: int = 760) -> str:
       padding: 12px;
     }}
     .priority-item b, .guide b {{ display: block; margin-bottom: 4px; }}
+    .panel-ok {{ border-left: 3px solid var(--safe); }}
+    .panel-risk {{ border-left: 3px solid var(--risk); }}
+    .neutral {{ color: var(--accent); }}
+    .guide-ok {{ border-left: 3px solid var(--safe); }}
+    .guide-warn {{ border-left: 3px solid var(--warn); }}
+    .guide-risk {{ border-left: 3px solid var(--risk); }}
     @media (max-width: 840px) {{
       header {{ padding: 22px 16px 14px; }}
       main {{ padding: 16px; }}
@@ -712,30 +719,30 @@ def render_momentum_dashboard() -> str:
   </header>
   <main>
     <section class="cards" aria-label="Momentum summary">
-      <div class="card"><div class="label">확대 후보</div><div class="value">{len(add_rows)}</div></div>
-      <div class="card"><div class="label">유지</div><div class="value">{len(hold_rows)}</div></div>
-      <div class="card"><div class="label">관찰</div><div class="value">{len(watch_rows)}</div></div>
-      <div class="card"><div class="label">축소 후보</div><div class="value">{len(cut_rows)}</div></div>
+      <div class="card"><div class="label">확대 후보</div><div class="value safe">{len(add_rows)}</div></div>
+      <div class="card"><div class="label">유지</div><div class="value neutral">{len(hold_rows)}</div></div>
+      <div class="card"><div class="label">관찰</div><div class="value warn">{len(watch_rows)}</div></div>
+      <div class="card"><div class="label">축소 후보</div><div class="value risk">{len(cut_rows)}</div></div>
       <div class="card"><div class="label">전체 주식 ETF</div><div class="value">{len(equity)}</div></div>
     </section>
 
     <section class="grid-2">
-      <div class="panel">
+      <div class="panel panel-ok">
         <h2>가장 강한 모멘텀</h2>
         <p>{esc(best.get("ticker", "-"))} · {esc(best.get("etf_name", "-"))}</p>
-        <p>점수 {esc(best.get("momentum_score", "-"))}, 3M {esc(best.get("three_month_return", "-"))}, 60D 고점 대비 {esc(best.get("drawdown_from_60d_high", "-"))}</p>
+        <p>점수 {esc(best.get("momentum_score") or "-")}, 3M {esc(best.get("three_month_return") or "-")}, 60D 고점 대비 {esc(best.get("drawdown_from_60d_high") or "-")}</p>
       </div>
-      <div class="panel">
+      <div class="panel panel-risk">
         <h2>가장 약한 모멘텀</h2>
         <p>{esc(weakest.get("ticker", "-"))} · {esc(weakest.get("etf_name", "-"))}</p>
-        <p>점수 {esc(weakest.get("momentum_score", "-"))}, 3M {esc(weakest.get("three_month_return", "-"))}, 60D 고점 대비 {esc(weakest.get("drawdown_from_60d_high", "-"))}</p>
+        <p>점수 {esc(weakest.get("momentum_score") or "-")}, 3M {esc(weakest.get("three_month_return") or "-")}, 60D 고점 대비 {esc(weakest.get("drawdown_from_60d_high") or "-")}</p>
       </div>
     </section>
 
     <section class="guide">
-      <div class="panel"><b>확대 후보</b>점수 80 이상. 카테고리 한도와 기존 비중을 확인한 뒤 증액 검토.</div>
-      <div class="panel"><b>관찰 후보</b>점수 50-64. 다음 주 업데이트 전까지 신규 매수 보류.</div>
-      <div class="panel"><b>축소 후보</b>점수 50 미만. 추세 이탈과 낙폭이 겹치면 교체 후보 탐색.</div>
+      <div class="panel guide-ok"><b>확대 후보</b>점수 80 이상. 카테고리 한도와 기존 비중을 확인한 뒤 증액 검토.</div>
+      <div class="panel guide-warn"><b>관찰 후보</b>점수 50-64. 다음 주 업데이트 전까지 신규 매수 보류.</div>
+      <div class="panel guide-risk"><b>축소 후보</b>점수 50 미만. 추세 이탈과 낙폭이 겹치면 교체 후보 탐색.</div>
     </section>
 
     <section class="grid-2">
