@@ -8,7 +8,6 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-UNIVERSE_PATH = ROOT / "제12회_GAPS_ETF_리스트_(v260509).xlsx_-_ETF.csv"
 PORTFOLIO_PATH = ROOT / "framework" / "initial-portfolio.csv"
 OUTPUT_PATH = ROOT / "framework" / "etf-master.csv"
 
@@ -29,6 +28,13 @@ CATEGORY_LIMITS = {
 
 def clean_number(value: str) -> int:
     return int(value.replace(",", "").strip() or "0")
+
+
+def find_universe_path() -> Path:
+    matches = sorted(ROOT.glob("*GAPS_ETF*ETF.csv"))
+    if not matches:
+        raise FileNotFoundError("Could not find competition ETF universe CSV matching '*GAPS_ETF*ETF.csv'")
+    return matches[0]
 
 
 def normalize_bucket(risk_label: str) -> str:
@@ -123,7 +129,8 @@ def load_portfolio() -> dict[str, dict[str, str]]:
 
 def load_universe() -> list[dict[str, str]]:
     rows: list[dict[str, str]] = []
-    with UNIVERSE_PATH.open(newline="", encoding="utf-8-sig") as handle:
+    universe_path = find_universe_path()
+    with universe_path.open(newline="", encoding="utf-8-sig") as handle:
         for raw in csv.reader(handle):
             if len(raw) <= 6 or not raw[1].strip().startswith("A"):
                 continue
