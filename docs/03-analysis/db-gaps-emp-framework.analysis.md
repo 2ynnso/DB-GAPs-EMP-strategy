@@ -6,9 +6,9 @@
 
 ## Match Rate: 100%
 
-Implemented items: 13  
-Total design items: 13  
-Formula: 13 / 13 * 100 = 100%
+Implemented items: 17  
+Total design items: 17  
+Formula: 17 / 17 * 100 = 100%
 
 ## Summary
 
@@ -23,6 +23,9 @@ The implementation now includes:
 - Weekly monitoring dashboard template.
 - Monthly rebalance log template.
 - Proposal-ready Korean framework text.
+- Static dashboard generator.
+- GitHub Actions dashboard deployment workflow.
+- GitHub Pages deployment configuration.
 
 The prior material gap has been closed. The framework now includes a complete 188-row enriched ETF master and a regeneration script.
 
@@ -42,6 +45,22 @@ The prior material gap has been closed. The framework now includes a complete 18
 - [x] Monthly rebalance log template created.
 - [x] Proposal-ready Korean narrative created.
 - [x] Full 188-row ETF master created.
+- [x] Static dashboard HTML generator created.
+- [x] GitHub Actions workflow validates ETF master, builds dashboard, and deploys Pages.
+- [x] GitHub Pages enabled with workflow deployment.
+- [x] Deployment runbook documented.
+
+## Check Results
+
+| Check | Result |
+|---|---|
+| Python syntax check | Pass |
+| ETF master build | Pass: 188 rows, 16 selected ETFs, 100% target weight |
+| Dashboard build | Pass: `public/index.html` generated |
+| Dashboard content smoke test | Pass: expected sections found |
+| GitHub Actions latest run | Pass: `Build and Deploy Dashboard` completed successfully |
+| GitHub Pages | Pass: workflow deployment enabled |
+| Dashboard URL | https://2ynnso.github.io/DB-GAPs-EMP-strategy/ |
 
 ## Constraint Verification
 
@@ -85,4 +104,5 @@ These are live market-data gaps, not framework implementation gaps.
 - [x] Framework implementation is ready for use.
 - [x] Full ETF master spreadsheet created.
 - [ ] Optional: convert the proposal-ready Markdown into the final `.docx` investment plan.
-- [ ] Recommended PDCA next action: report phase.
+- [x] Dashboard GitHub Actions deployment verified.
+- [ ] Recommended PDCA next action: report phase if the report should be refreshed with dashboard deployment details.
