@@ -13,3 +13,6 @@ __pycache__/
 # Temporary exports
 ~$*
 *.tmp
+
+# Generated dashboard artifact
+public/

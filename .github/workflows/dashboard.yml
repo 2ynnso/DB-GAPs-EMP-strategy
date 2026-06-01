@@ -1,0 +1,74 @@
+name: Build and Deploy Dashboard
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "framework/**"
+      - "scripts/**"
+      - ".github/workflows/dashboard.yml"
+      - "README.md"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Build ETF master
+        run: python3 scripts/build-etf-master.py
+
+      - name: Validate ETF master
+        run: |
+          python3 - <<'PY'
+          import csv
+
+          with open("framework/etf-master.csv", newline="", encoding="utf-8") as handle:
+              rows = list(csv.DictReader(handle))
+
+          selected = [row for row in rows if row["selected"] == "Y"]
+          total_weight = sum(float(row["target_weight"]) for row in selected)
+
+          assert len(rows) == 188, f"expected 188 ETF rows, got {len(rows)}"
+          assert len(selected) == 16, f"expected 16 selected ETFs, got {len(selected)}"
+          assert round(total_weight, 6) == 100, f"expected selected weight 100, got {total_weight}"
+          print("ETF master validation passed")
+          PY
+
+      - name: Build dashboard
+        run: python3 scripts/build-dashboard.py
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload dashboard artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

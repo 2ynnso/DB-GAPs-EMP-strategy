@@ -55,6 +55,10 @@ All stated category limits are satisfied:
 │   └── weekly-monitoring-dashboard.csv
 ├── scripts/
 │   └── build-etf-master.py
+├── public/
+│   └── index.html
+├── .github/workflows/
+│   └── dashboard.yml
 ├── 투자계획서/
 └── 제12회_GAPS_ETF_리스트_(v260509).xlsx_-_ETF.csv
 ```
@@ -69,6 +73,9 @@ All stated category limits are satisfied:
 | `framework/monthly-rebalance-log.csv` | Monthly turnover and rebalance log |
 | `framework/proposal-ready-framework.md` | Korean proposal-ready strategy text |
 | `scripts/build-etf-master.py` | Regenerates the enriched ETF master |
+| `scripts/build-dashboard.py` | Builds the static dashboard HTML |
+| `.github/workflows/dashboard.yml` | Builds and deploys the dashboard with GitHub Actions |
+| `docs/04-deploy/dashboard-actions.md` | Dashboard deployment runbook |
 | `docs/02-design/features/db-gaps-emp-framework.design.md` | Full framework design |
 | `docs/03-analysis/db-gaps-emp-framework.analysis.md` | Gap analysis and match rate |
 | `docs/04-report/db-gaps-emp-framework.report.md` | Completion report |
@@ -97,6 +104,25 @@ Monthly:
 PDCA status: complete.
 
 Design-to-implementation match rate: 100% after ETF master implementation.
+
+## Dashboard
+
+The dashboard is generated from the CSV files and deployed through GitHub Actions.
+
+Local build:
+
+```bash
+python3 scripts/build-etf-master.py
+python3 scripts/build-dashboard.py
+```
+
+GitHub Pages setup:
+
+1. Open repository `Settings`.
+2. Open `Pages`.
+3. Set `Build and deployment` source to `GitHub Actions`.
+
+After that, pushes to `main` will run `.github/workflows/dashboard.yml` and deploy `public/index.html`.
 
 Remaining optional work:
 
