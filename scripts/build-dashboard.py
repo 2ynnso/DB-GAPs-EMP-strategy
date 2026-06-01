@@ -99,6 +99,10 @@ ACTION_KO = {
     "Use as rebalance source or risk buffer": "리밸런싱 재원 또는 위험 완충으로 활용",
     "Watch BOK and credit spreads": "BOK 결정과 크레딧 스프레드 확인",
     "Watch USD/KRW and US rate shock": "USD/KRW와 미국 금리 충격 확인",
+    "Positive momentum confirmed; review category limits before adding": "모멘텀 양호. 한도 확인 후 확대 검토",
+    "Momentum acceptable; keep current allocation": "모멘텀 유지. 현재 비중 유지",
+    "Momentum mixed; review next weekly update before trading": "모멘텀 혼조. 다음 주 확인 전까지 관찰",
+    "Momentum weak; prepare reduction or replacement candidate": "모멘텀 약화. 축소 또는 대체 후보 준비",
 }
 
 
@@ -142,7 +146,12 @@ def dashboard_status(weekly: list[dict[str, str]]) -> tuple[str, str]:
         return "모멘텀 확인 완료", "주간 모멘텀과 추세 필드가 모두 입력되어 있습니다."
     if any(status == "일부 업데이트 필요" for status in statuses):
         return "모멘텀 일부 확인", "일부 클러스터의 수익률, 추세, 점수 필드가 비어 있습니다."
-    return "모멘텀 미확인", "현재 CSV에는 1M/3M/6M 수익률과 추세 값이 비어 있습니다. 대시보드는 자동 가격 데이터를 가져오지 않습니다."
+    return "모멘텀 미확인", "현재 CSV에는 1M/3M/6M 수익률과 추세 값이 비어 있습니다. GitHub Actions 자동 업데이트 실행이 필요합니다."
+
+
+def latest_price_date(weekly: list[dict[str, str]]) -> str:
+    dates = sorted({row.get("price_data_as_of", "") for row in weekly if row.get("price_data_as_of", "")})
+    return dates[-1] if dates else "미수집"
 
 
 def status_class(status: str) -> str:
@@ -238,6 +247,7 @@ def render_dashboard() -> str:
     status_title, status_detail = dashboard_status(weekly)
     monitoring_ready = sum(1 for row in weekly if momentum_status(row) == "업데이트 완료")
     monitoring_total = len(weekly)
+    price_data_as_of = latest_price_date(weekly)
 
     category_rows = category_summary(portfolio)
     cluster_rows = cluster_summary(portfolio)
@@ -274,6 +284,14 @@ def render_dashboard() -> str:
             "cluster": row["cluster"],
             "held_tickers": row["held_tickers"],
             "target_weight": fmt_weight(row["target_weight"]),
+            "one_month_return": row.get("one_month_return", ""),
+            "three_month_return": row.get("three_month_return", ""),
+            "six_month_return": row.get("six_month_return", ""),
+            "above_20d_ma": row.get("above_20d_ma", ""),
+            "above_60d_ma": row.get("above_60d_ma", ""),
+            "drawdown_from_60d_high": row.get("drawdown_from_60d_high", ""),
+            "relative_rank": row.get("relative_rank", ""),
+            "cluster_score": row.get("cluster_score", ""),
             "momentum_status": momentum_status(row),
             "decision": decision_label(row["decision"]),
             "proposed_action": action_label(row["proposed_action"]),
@@ -463,7 +481,7 @@ def render_dashboard() -> str:
     <section class="status-panel" aria-label="현재 상황">
       <div class="panel">
         <strong>현재 상황: 기준 포트폴리오 구축 완료, 모멘텀 데이터 업데이트 필요</strong>
-        <p>초기 포트폴리오는 위험자산 70%, 안전자산 30%로 제약 조건을 통과했습니다. 다만 주간 모멘텀 값은 아직 CSV에 입력되지 않았으므로 현재 화면은 가격 모멘텀을 자동 확인한 결과가 아닙니다.</p>
+        <p>초기 포트폴리오는 위험자산 70%, 안전자산 30%로 제약 조건을 통과했습니다. 모멘텀 값은 GitHub Actions가 가격 API에서 자동 수집해 갱신합니다.</p>
         <div class="priority">
           <div class="priority-item"><b>1. 먼저 확인</b>1M/3M/6M 수익률, 20D/60D 추세</div>
           <div class="priority-item"><b>2. 다음 확인</b>외국인/기관 수급, USD/KRW, 유가</div>
@@ -475,6 +493,7 @@ def render_dashboard() -> str:
         <p>{esc(status_detail)}</p>
         <ul>
           <li>모니터링 완료 클러스터: {monitoring_ready}/{monitoring_total}</li>
+          <li>가격 데이터 기준일: {esc(price_data_as_of)}</li>
           <li>대시보드는 repository CSV 기준으로만 표시됩니다.</li>
         </ul>
       </div>
@@ -532,6 +551,14 @@ def render_dashboard() -> str:
         ("held_tickers", "보유 티커"),
         ("target_weight", "목표 비중"),
         ("momentum_status", "모멘텀 상태"),
+        ("one_month_return", "1M"),
+        ("three_month_return", "3M"),
+        ("six_month_return", "6M"),
+        ("above_20d_ma", "20D 상회"),
+        ("above_60d_ma", "60D 상회"),
+        ("drawdown_from_60d_high", "60D 고점 대비"),
+        ("relative_rank", "상대순위"),
+        ("cluster_score", "점수"),
         ("decision", "판정"),
         ("proposed_action", "필요 행동"),
         ("notes", "메모"),

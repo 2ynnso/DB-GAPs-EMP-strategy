@@ -12,23 +12,26 @@ The workflow is intentionally dependency-light:
 - Python standard library only.
 - No package install step.
 - No API keys or secrets.
-- No external data fetch.
+- Price data is fetched through Yahoo Finance's public chart endpoint.
 
 ## Build Flow
 
 1. Checkout repository.
 2. Set up Python 3.12.
 3. Regenerate `framework/etf-master.csv`.
-4. Validate row counts and target weights.
-5. Generate `public/index.html`.
-6. Upload the `public/` folder as a Pages artifact.
-7. Deploy to GitHub Pages.
+4. Fetch ETF prices and update `framework/weekly-monitoring-dashboard.csv`.
+5. Validate row counts, target weights, and momentum fields.
+6. Generate `public/index.html`.
+7. Commit updated monitoring CSV on scheduled/manual runs.
+8. Upload the `public/` folder as a Pages artifact.
+9. Deploy to GitHub Pages.
 
 ## Trigger
 
 The workflow runs on:
 
 - Push to `main` when `framework/**`, `scripts/**`, the workflow file, or `README.md` changes.
+- Scheduled weekdays at 17:30 KST.
 - Manual `workflow_dispatch`.
 
 ## Required GitHub Setting
@@ -78,14 +81,17 @@ The workflow fails if:
 - Selected ETF target weight does not total 100%.
 - Dashboard generation fails.
 
-## Operational Note
+## Momentum Update
 
-The dashboard displays repository data. It does not fetch live prices, flows, or macro data.
+The dashboard fetches selected ETF prices automatically through `scripts/update-momentum.py`.
 
-Current momentum behavior:
+Calculated fields:
 
-- If 1M/3M/6M return and trend fields are empty, the dashboard shows `모멘텀 미입력`.
-- If some fields are filled, it shows `일부 업데이트 필요`.
-- If all required weekly fields are filled, it shows `업데이트 완료`.
+- 1M, 3M, and 6M returns.
+- 20D and 60D moving-average trend checks.
+- Drawdown from 60D high.
+- Relative rank by 3M return.
+- Cluster score.
+- Add/Hold/Watch/Cut decision.
 
-Weekly momentum and flow fields should be updated in `framework/weekly-monitoring-dashboard.csv` before pushing if the team wants the dashboard to reflect current operating signals.
+Flow and macro fields remain manual checks because they require non-price data.

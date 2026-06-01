@@ -8,10 +8,14 @@ on:
       - "scripts/**"
       - ".github/workflows/dashboard.yml"
       - "README.md"
+      - "docs/04-deploy/**"
+  schedule:
+    # 17:30 KST on weekdays, after the Korean market close.
+    - cron: "30 8 * * 1-5"
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -34,6 +38,9 @@ jobs:
       - name: Build ETF master
         run: python3 scripts/build-etf-master.py
 
+      - name: Update momentum from price API
+        run: python3 scripts/update-momentum.py
+
       - name: Validate ETF master
         run: |
           python3 - <<'PY'
@@ -51,8 +58,48 @@ jobs:
           print("ETF master validation passed")
           PY
 
+      - name: Validate momentum dashboard data
+        run: |
+          python3 - <<'PY'
+          import csv
+
+          required = [
+              "one_month_return",
+              "three_month_return",
+              "six_month_return",
+              "above_20d_ma",
+              "above_60d_ma",
+              "drawdown_from_60d_high",
+              "relative_rank",
+              "cluster_score",
+              "price_data_as_of",
+          ]
+
+          with open("framework/weekly-monitoring-dashboard.csv", newline="", encoding="utf-8") as handle:
+              rows = list(csv.DictReader(handle))
+
+          assert len(rows) == 8, f"expected 8 monitoring clusters, got {len(rows)}"
+          for row in rows:
+              missing = [field for field in required if not row.get(field)]
+              assert not missing, f"{row['cluster']} missing fields: {missing}"
+          print("Momentum validation passed")
+          PY
+
       - name: Build dashboard
         run: python3 scripts/build-dashboard.py
+
+      - name: Commit updated momentum data
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add framework/weekly-monitoring-dashboard.csv framework/etf-master.csv
+          if git diff --cached --quiet; then
+            echo "No momentum data changes to commit"
+          else
+            git commit -m "Update momentum dashboard data"
+            git push
+          fi
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5

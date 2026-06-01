@@ -117,7 +117,7 @@ The dashboard UI is Korean-first and shows:
 - Cluster and category usage.
 - Weekly monitoring actions.
 
-Important: the dashboard does not fetch live prices yet. The weekly momentum fields in `framework/weekly-monitoring-dashboard.csv` must be updated for the dashboard to show confirmed momentum status.
+Momentum is updated automatically by GitHub Actions. The workflow calls Yahoo Finance's chart API for the selected KRX ETF tickers, computes 1M/3M/6M returns, trend filters, drawdown, relative rank, cluster score, and then rebuilds the dashboard.
 
 Local build:
 
@@ -133,6 +133,12 @@ GitHub Pages setup:
 3. Set `Build and deployment` source to `GitHub Actions`.
 
 After that, pushes to `main` will run `.github/workflows/dashboard.yml` and deploy `public/index.html`.
+
+Automatic update schedule:
+
+- Weekdays at 17:30 KST, after the Korean market close.
+- Manual refresh through GitHub Actions `workflow_dispatch`.
+- Pushes to dashboard-related files also rebuild the dashboard.
 
 Remaining optional work:
 

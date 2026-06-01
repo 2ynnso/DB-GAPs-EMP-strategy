@@ -1,9 +1,9 @@
-week_start,cluster,held_tickers,target_weight,current_weight,one_month_return,three_month_return,six_month_return,above_20d_ma,above_60d_ma,drawdown_from_60d_high,relative_rank,flow_signal,macro_signal,cluster_score,decision,proposed_action,notes
-2026-06-01,AI & Semiconductors,"A395160;A133690;A497570",26,,,,,,,,,,,,Hold,Update signals weekly,
-2026-06-01,AI Power Infrastructure,A487230,4,,,,,,,,,,,,Hold,Update signals weekly,
-2026-06-01,Korea Cyclical Alpha,"A466920;A449450",7,,,,,,,,,,,,Hold,Update signals weekly,
-2026-06-01,Core Equity Beta,"A069500;A360750",23,,,,,,,,,,,,Hold,Update signals weekly,
-2026-06-01,Commodity Hedge,"A411060;A261220",10,,,,,,,,,,,,Hold,Update oil and gold thesis weekly,
-2026-06-01,Short-Duration Safety,"A459580;A423160",13,,,,,,,,,,,,Hold,Use as rebalance source or risk buffer,
-2026-06-01,Domestic Carry,"A157450;A114260;A273130",13,,,,,,,,,,,,Hold,Watch BOK and credit spreads,
-2026-06-01,USD Safety,A329750,4,,,,,,,,,,,,Hold,Watch USD/KRW and US rate shock,
+week_start,cluster,held_tickers,target_weight,current_weight,one_month_return,three_month_return,six_month_return,above_20d_ma,above_60d_ma,drawdown_from_60d_high,relative_rank,flow_signal,macro_signal,cluster_score,decision,proposed_action,notes,price_data_as_of,data_source
+2026-06-01,AI & Semiconductors,A395160;A133690;A497570,26,26,29.57%,48.57%,105.39%,Y,Y,0.00%,1/8,Manual check,Manual check,100.0,Add,Positive momentum confirmed; review category limits before adding,Auto-updated from Yahoo Finance chart API as of 2026-06-01,2026-06-01,Yahoo Finance chart API
+2026-06-01,AI Power Infrastructure,A487230,4,4,2.40%,25.61%,53.37%,N,Y,-8.06%,3/8,Manual check,Manual check,70.4,Hold,Momentum acceptable; keep current allocation,Auto-updated from Yahoo Finance chart API as of 2026-06-01,2026-06-01,Yahoo Finance chart API
+2026-06-01,Korea Cyclical Alpha,A466920;A449450,7,7,-11.55%,-1.67%,21.03%,N,Y,-13.51%,8/8,Manual check,Manual check,21.0,Cut,Momentum weak; prepare reduction or replacement candidate,Auto-updated from Yahoo Finance chart API as of 2026-06-01,2026-06-01,Yahoo Finance chart API
+2026-06-01,Core Equity Beta,A069500;A360750,23,23,22.10%,30.07%,80.17%,Y,Y,0.00%,2/8,Manual check,Manual check,95.7,Add,Positive momentum confirmed; review category limits before adding,Auto-updated from Yahoo Finance chart API as of 2026-06-01,2026-06-01,Yahoo Finance chart API
+2026-06-01,Commodity Hedge,A411060;A261220,10,10,-2.98%,17.63%,38.61%,N,N,-13.25%,4/8,Manual check,Manual check,41.6,Cut,Momentum weak; prepare reduction or replacement candidate,Auto-updated from Yahoo Finance chart API as of 2026-06-01,2026-06-01,Yahoo Finance chart API
+2026-06-01,Short-Duration Safety,A459580;A423160,13,13,-0.18%,0.05%,-0.14%,N,N,-0.18%,6/8,Manual check,Manual check,33.1,Watch,Momentum mixed; review next weekly update before trading,Auto-updated from Yahoo Finance chart API as of 2026-06-01,2026-06-01,Yahoo Finance chart API
+2026-06-01,Domestic Carry,A157450;A114260;A273130,13,13,-0.84%,-1.56%,-2.73%,N,N,-1.47%,7/8,Manual check,Manual check,14.8,Watch,Momentum mixed; review next weekly update before trading,Auto-updated from Yahoo Finance chart API as of 2026-06-01,2026-06-01,Yahoo Finance chart API
+2026-06-01,USD Safety,A329750,4,4,2.39%,6.61%,2.95%,Y,Y,-1.33%,5/8,Manual check,Manual check,82.9,Hold,Momentum acceptable; keep current allocation,Auto-updated from Yahoo Finance chart API as of 2026-06-01,2026-06-01,Yahoo Finance chart API
