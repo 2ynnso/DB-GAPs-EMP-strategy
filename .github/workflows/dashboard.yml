@@ -93,8 +93,10 @@ jobs:
           with open("framework/equity-momentum.csv", newline="", encoding="utf-8") as handle:
               rows = list(csv.DictReader(handle))
 
-          assert len(rows) == 8, f"expected 8 equity ETF rows, got {len(rows)}"
-          for row in rows:
+          assert len(rows) >= 120, f"expected broad equity ETF universe, got {len(rows)}"
+          scored = [row for row in rows if row.get("momentum_score")]
+          assert len(scored) >= 100, f"expected at least 100 scored equity ETFs, got {len(scored)}"
+          for row in scored:
               for field in ["one_month_return", "three_month_return", "six_month_return", "momentum_score", "opportunity"]:
                   assert row.get(field), f"{row['ticker']} missing {field}"
           print("Equity momentum validation passed")

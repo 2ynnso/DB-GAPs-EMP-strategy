@@ -16,6 +16,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 FRAMEWORK_DIR = ROOT / "framework"
 PORTFOLIO_PATH = FRAMEWORK_DIR / "initial-portfolio.csv"
+ETF_MASTER_PATH = FRAMEWORK_DIR / "etf-master.csv"
 WEEKLY_PATH = FRAMEWORK_DIR / "weekly-monitoring-dashboard.csv"
 EQUITY_MOMENTUM_PATH = FRAMEWORK_DIR / "equity-momentum.csv"
 
@@ -53,6 +54,7 @@ EQUITY_MOMENTUM_FIELDS = [
     "competition_category",
     "cluster",
     "target_weight",
+    "selected",
     "one_month_return",
     "three_month_return",
     "six_month_return",
@@ -180,14 +182,23 @@ def action_from_decision(decision: str) -> str:
     }[decision]
 
 
-def build_price_metrics(portfolio: list[dict[str, str]]) -> tuple[dict[str, dict[str, float | bool | str]], str]:
+def build_price_metrics(rows: list[dict[str, str]]) -> tuple[dict[str, dict[str, float | bool | str]], str]:
     metrics: dict[str, dict[str, float | bool | str]] = {}
     latest_timestamps: list[int] = []
 
-    for row in portfolio:
+    for row in rows:
         ticker = row["ticker"]
+        if ticker in metrics:
+            continue
         symbol = ticker_to_yahoo_symbol(ticker)
-        points = fetch_chart(symbol)
+        try:
+            points = fetch_chart(symbol)
+        except Exception as exc:  # noqa: BLE001 - keep the full universe visible even if one ETF fails
+            metrics[ticker] = {
+                "symbol": symbol,
+                "error": str(exc),
+            }
+            continue
         timestamps = [ts for ts, close in points]
         closes = [close for ts, close in points]
         latest_timestamps.append(timestamps[-1])
@@ -208,9 +219,18 @@ def build_price_metrics(portfolio: list[dict[str, str]]) -> tuple[dict[str, dict
             "drawdown_from_60d_high": drawdown,
         }
 
+    if not latest_timestamps:
+        raise RuntimeError("no price data fetched")
     as_of_ts = max(latest_timestamps)
     as_of = datetime.fromtimestamp(as_of_ts, tz=timezone.utc).strftime("%Y-%m-%d")
     return metrics, as_of
+
+
+def require_metric(ticker: str, metrics: dict[str, dict[str, float | bool | str]]) -> dict[str, float | bool | str]:
+    metric = metrics.get(ticker)
+    if not metric or "error" in metric:
+        raise RuntimeError(f"required ticker {ticker} has no usable price data: {metric}")
+    return metric
 
 
 def cluster_metrics(
@@ -219,7 +239,7 @@ def cluster_metrics(
     metrics: dict[str, dict[str, float | bool | str]],
 ) -> dict[str, float | bool]:
     tickers = [ticker.strip() for ticker in weekly_row["held_tickers"].split(";") if ticker.strip()]
-    selected = [(weights.get(ticker, 0.0), metrics[ticker]) for ticker in tickers if ticker in metrics]
+    selected = [(weights.get(ticker, 0.0), require_metric(ticker, metrics)) for ticker in tickers if ticker in metrics]
     if not selected:
         raise ValueError(f"no fetched price metrics for cluster {weekly_row['cluster']}")
 
@@ -284,16 +304,16 @@ def opportunity_label(decision: str) -> str:
 
 
 def write_equity_momentum(
-    portfolio: list[dict[str, str]],
+    equity_universe: list[dict[str, str]],
     metrics: dict[str, dict[str, float | bool | str]],
     as_of: str,
 ) -> None:
     equity_rows = [
-        row for row in portfolio
-        if row["competition_category"] in EQUITY_CATEGORIES and row["ticker"] in metrics
+        row for row in equity_universe
+        if row["competition_category"] in EQUITY_CATEGORIES
     ]
     ranked = sorted(
-        equity_rows,
+        [row for row in equity_rows if row["ticker"] in metrics and "error" not in metrics[row["ticker"]]],
         key=lambda row: float(metrics[row["ticker"]]["three_month_return"]),
         reverse=True,
     )
@@ -303,7 +323,32 @@ def write_equity_momentum(
     output: list[dict[str, str]] = []
     for row in equity_rows:
         ticker = row["ticker"]
-        metric = metrics[ticker]
+        metric = metrics.get(ticker, {})
+        if not metric or "error" in metric:
+            output.append(
+                {
+                    "price_data_as_of": as_of,
+                    "ticker": ticker,
+                    "etf_name": row["etf_name"],
+                    "competition_category": row["competition_category"],
+                    "cluster": row["cluster"],
+                    "target_weight": row.get("target_weight", "0"),
+                    "selected": row.get("selected", "N"),
+                    "one_month_return": "",
+                    "three_month_return": "",
+                    "six_month_return": "",
+                    "above_20d_ma": "",
+                    "above_60d_ma": "",
+                    "drawdown_from_60d_high": "",
+                    "relative_rank": "",
+                    "momentum_score": "",
+                    "decision": "Watch",
+                    "opportunity": "데이터 확인 필요",
+                    "data_source": f"Fetch failed: {metric.get('error', 'unknown error')}",
+                }
+            )
+            continue
+
         rank = rank_lookup[ticker]
         relative_percentile = 100 if count == 1 else 100 * (count - rank) / (count - 1)
         score = score_equity(metric, relative_percentile)
@@ -315,7 +360,8 @@ def write_equity_momentum(
                 "etf_name": row["etf_name"],
                 "competition_category": row["competition_category"],
                 "cluster": row["cluster"],
-                "target_weight": row["target_weight"],
+                "target_weight": row.get("target_weight", "0"),
+                "selected": row.get("selected", "N"),
                 "one_month_return": format_pct(float(metric["one_month_return"])),
                 "three_month_return": format_pct(float(metric["three_month_return"])),
                 "six_month_return": format_pct(float(metric["six_month_return"])),
@@ -330,7 +376,7 @@ def write_equity_momentum(
             }
         )
 
-    output.sort(key=lambda row: float(row["momentum_score"]), reverse=True)
+    output.sort(key=lambda row: float(row["momentum_score"] or "-999"), reverse=True)
     with EQUITY_MOMENTUM_PATH.open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=EQUITY_MOMENTUM_FIELDS)
         writer.writeheader()
@@ -339,10 +385,13 @@ def write_equity_momentum(
 
 def update_weekly_dashboard() -> None:
     portfolio = read_csv(PORTFOLIO_PATH)
+    etf_master = read_csv(ETF_MASTER_PATH)
     weekly = read_csv(WEEKLY_PATH)
     weights = {row["ticker"]: float(row["target_weight"]) for row in portfolio}
-    metrics, as_of = build_price_metrics(portfolio)
-    write_equity_momentum(portfolio, metrics, as_of)
+    equity_universe = [row for row in etf_master if row["competition_category"] in EQUITY_CATEGORIES]
+    fetch_rows = list({row["ticker"]: row for row in [*portfolio, *equity_universe]}.values())
+    metrics, as_of = build_price_metrics(fetch_rows)
+    write_equity_momentum(equity_universe, metrics, as_of)
 
     computed = {
         row["cluster"]: cluster_metrics(row, weights, metrics)

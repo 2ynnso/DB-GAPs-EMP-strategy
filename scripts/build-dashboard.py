@@ -210,6 +210,188 @@ def build_table(rows: list[dict[str, str]], columns: list[tuple[str, str]], clas
     """
 
 
+def base_css(table_min_width: int = 760) -> str:
+    return f"""
+    :root {{
+      color-scheme: light;
+      --bg: #f6f7f9;
+      --panel: #ffffff;
+      --text: #151923;
+      --muted: #667085;
+      --line: #e3e7ee;
+      --line-strong: #cdd5e1;
+      --accent: #1f5f99;
+      --accent-soft: #eef5ff;
+      --risk: #b42318;
+      --safe: #067647;
+      --warn: #b54708;
+      --missing: #7a271a;
+      --shadow: 0 10px 28px rgba(15, 23, 42, .06);
+    }}
+    * {{ box-sizing: border-box; }}
+    body {{
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, rgba(31, 95, 153, .10), transparent 30rem),
+        var(--bg);
+      color: var(--text);
+      font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }}
+    header {{
+      padding: 28px 24px 22px;
+      background: rgba(255, 255, 255, .92);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(10px);
+    }}
+    main {{
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 24px;
+    }}
+    h1, h2 {{ margin: 0; line-height: 1.2; letter-spacing: 0; }}
+    h1 {{ font-size: 28px; }}
+    h2 {{ font-size: 18px; margin-bottom: 12px; }}
+    p {{ margin: 8px 0 0; color: var(--muted); }}
+    a {{ color: var(--accent); font-weight: 700; text-decoration: none; }}
+    section {{ margin-bottom: 22px; }}
+    .hero {{
+      max-width: 1180px;
+      margin: 0 auto;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 20px;
+    }}
+    .hero-copy {{ max-width: 760px; }}
+    .nav-pills {{ display: flex; gap: 8px; flex-wrap: wrap; }}
+    .nav-pills a {{
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 7px 12px;
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+      background: #fff;
+      color: #344054;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, .04);
+    }}
+    .nav-pills a.active {{
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }}
+    .cards {{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+    }}
+    .status-panel {{
+      display: grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap: 16px;
+      margin-bottom: 20px;
+    }}
+    .grid-2 {{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }}
+    .guide {{
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }}
+    .card, .panel, .table-wrap {{
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }}
+    .card {{ padding: 14px 16px; }}
+    .panel {{ padding: 18px; }}
+    .panel strong {{ display: block; font-size: 20px; margin-bottom: 6px; }}
+    .panel ul {{ margin: 12px 0 0; padding-left: 18px; color: var(--muted); }}
+    .panel li {{ margin: 4px 0; }}
+    .label {{
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }}
+    .value {{
+      margin-top: 6px;
+      font-size: 24px;
+      font-weight: 800;
+    }}
+    .risk {{ color: var(--risk); }}
+    .safe {{ color: var(--safe); }}
+    .badge {{
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      background: #edf2f7;
+      color: #344054;
+      white-space: nowrap;
+    }}
+    .badge.ok {{ background: #ecfdf3; color: var(--safe); }}
+    .badge.warn {{ background: #fffaeb; color: var(--warn); }}
+    .badge.missing {{ background: #fef3f2; color: var(--missing); }}
+    .badge.neutral {{ background: var(--accent-soft); color: var(--accent); }}
+    .table-wrap {{ overflow-x: auto; }}
+    table {{
+      width: 100%;
+      border-collapse: collapse;
+      min-width: {table_min_width}px;
+    }}
+    th, td {{
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      white-space: normal;
+    }}
+    th {{
+      position: sticky;
+      top: 0;
+      background: #f8fafc;
+      color: #475467;
+      font-weight: 800;
+      font-size: 12px;
+      z-index: 1;
+    }}
+    tbody tr:nth-child(even) {{ background: #fbfcfe; }}
+    tr:last-child td {{ border-bottom: 0; }}
+    .note {{
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 8px;
+    }}
+    .priority {{
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }}
+    .priority-item {{
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+    }}
+    .priority-item b, .guide b {{ display: block; margin-bottom: 4px; }}
+    @media (max-width: 840px) {{
+      header {{ padding: 22px 16px 14px; }}
+      main {{ padding: 16px; }}
+      .hero {{ align-items: flex-start; flex-direction: column; }}
+      .cards, .grid-2, .status-panel, .priority, .guide {{ grid-template-columns: 1fr; }}
+      h1 {{ font-size: 24px; }}
+    }}
+  """
+
+
 def allocation_summary(portfolio: list[dict[str, str]]) -> dict[str, float]:
     summary = {"Risk": 0.0, "Safe": 0.0, "Total": 0.0}
     for row in portfolio:
@@ -346,168 +528,26 @@ def render_dashboard() -> str:
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>DB GAPS EMP Dashboard</title>
   <style>
-    :root {{
-      color-scheme: light;
-      --bg: #f5f6f8;
-      --panel: #ffffff;
-      --text: #151923;
-      --muted: #687386;
-      --line: #d9dee7;
-      --accent: #1f5f99;
-      --risk: #b42318;
-      --safe: #067647;
-      --warn: #b54708;
-      --missing: #7a271a;
-      --soft: #eef4ff;
-    }}
-    * {{ box-sizing: border-box; }}
-    body {{
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }}
-    header {{
-      padding: 30px 24px 22px;
-      background: linear-gradient(180deg, #ffffff 0%, #eef4ff 100%);
-      border-bottom: 1px solid var(--line);
-    }}
-    main {{
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 24px;
-    }}
-    h1, h2 {{
-      margin: 0;
-      line-height: 1.2;
-    }}
-    h1 {{ font-size: 28px; letter-spacing: 0; }}
-    h2 {{ font-size: 18px; margin-bottom: 12px; }}
-    p {{ margin: 8px 0 0; color: var(--muted); }}
-    section {{ margin-bottom: 24px; }}
-    .hero {{
-      max-width: 1180px;
-      margin: 0 auto;
-    }}
-    .cards {{
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 12px;
-    }}
-    .status-panel {{
-      display: grid;
-      grid-template-columns: 1.25fr .75fr;
-      gap: 16px;
-      margin-bottom: 20px;
-    }}
-    .panel {{
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 18px;
-    }}
-    .panel strong {{ display: block; font-size: 20px; margin-bottom: 6px; }}
-    .panel ul {{ margin: 12px 0 0; padding-left: 18px; color: var(--muted); }}
-    .panel li {{ margin: 4px 0; }}
-    .card {{
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 14px 16px;
-    }}
-    .label {{
-      color: var(--muted);
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: .04em;
-    }}
-    .value {{
-      margin-top: 6px;
-      font-size: 24px;
-      font-weight: 700;
-    }}
-    .risk {{ color: var(--risk); }}
-    .safe {{ color: var(--safe); }}
-    .badge {{
-      display: inline-block;
-      padding: 3px 8px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 700;
-      background: #edf2f7;
-      color: #344054;
-    }}
-    .badge.ok {{ background: #ecfdf3; color: var(--safe); }}
-    .badge.warn {{ background: #fffaeb; color: var(--warn); }}
-    .badge.missing {{ background: #fef3f2; color: var(--missing); }}
-    .table-wrap {{
-      overflow-x: auto;
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-    }}
-    table {{
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 760px;
-    }}
-    th, td {{
-      padding: 10px 12px;
-      border-bottom: 1px solid var(--line);
-      text-align: left;
-      vertical-align: top;
-      white-space: normal;
-    }}
-    th {{
-      background: #f0f3f8;
-      color: #3d4758;
-      font-weight: 700;
-      font-size: 12px;
-    }}
-    tr:last-child td {{ border-bottom: 0; }}
-    .grid-2 {{
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }}
-    .note {{
-      color: var(--muted);
-      font-size: 13px;
-      margin-top: 8px;
-    }}
-    .priority {{
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 12px;
-    }}
-    .priority-item {{
-      background: #f8fafc;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 12px;
-    }}
-    .priority-item b {{ display: block; margin-bottom: 4px; }}
-    @media (max-width: 840px) {{
-      header {{ padding: 22px 16px 14px; }}
-      main {{ padding: 16px; }}
-      .cards, .grid-2, .status-panel, .priority {{ grid-template-columns: 1fr; }}
-      h1 {{ font-size: 24px; }}
-    }}
+{base_css()}
   </style>
 </head>
 <body>
   <header>
     <div class="hero">
-      <h1>DB GAPS EMP 운용 대시보드</h1>
-      <p>2026년 6-8월 ETF EMP 전략 현황입니다. GitHub Actions 생성 시각: {esc(generated_at)}.</p>
-      <p><a href="momentum.html">주식 모멘텀 대시보드 보기</a></p>
+      <div class="hero-copy">
+        <h1>DB GAPS EMP 운용 대시보드</h1>
+        <p>2026년 6-8월 ETF EMP 전략 현황입니다. GitHub Actions 생성 시각: {esc(generated_at)}.</p>
+      </div>
+      <nav class="nav-pills" aria-label="dashboard navigation">
+        <a class="active" href="index.html">종합</a>
+        <a href="momentum.html">주식 모멘텀</a>
+      </nav>
     </div>
   </header>
   <main>
     <section class="status-panel" aria-label="현재 상황">
       <div class="panel">
-        <strong>현재 상황: 기준 포트폴리오 구축 완료, 모멘텀 데이터 업데이트 필요</strong>
+        <strong>현재 상황: 기준 포트폴리오 구축 완료, 자동 모멘텀 업데이트 작동 중</strong>
         <p>초기 포트폴리오는 위험자산 70%, 안전자산 30%로 제약 조건을 통과했습니다. 모멘텀 값은 GitHub Actions가 가격 API에서 자동 수집해 갱신합니다.</p>
         <div class="priority">
           <div class="priority-item"><b>1. 먼저 확인</b>1M/3M/6M 수익률, 20D/60D 추세</div>
@@ -626,6 +666,7 @@ def render_momentum_dashboard() -> str:
             "etf_name": row["etf_name"],
             "competition_category": row["competition_category"],
             "cluster": row["cluster"],
+            "selected": "보유" if row.get("selected") == "Y" else "미보유",
             "target_weight": fmt_weight(row["target_weight"]),
             "one_month_return": row["one_month_return"],
             "three_month_return": row["three_month_return"],
@@ -640,8 +681,8 @@ def render_momentum_dashboard() -> str:
         }
 
     ranked_rows = [row_view(row) for row in sorted(equity, key=lambda row: parse_score(row["momentum_score"]), reverse=True)]
-    buy_rows = [row_view(row) for row in add_rows]
-    sell_rows = [row_view(row) for row in cut_rows]
+    buy_rows = [row_view(row) for row in sorted(add_rows, key=lambda row: parse_score(row["momentum_score"]), reverse=True)[:12]]
+    sell_rows = [row_view(row) for row in sorted(cut_rows, key=lambda row: parse_score(row["momentum_score"]))[:12]]
 
     best = ranked_rows[0] if ranked_rows else {}
     weakest = ranked_rows[-1] if ranked_rows else {}
@@ -653,96 +694,20 @@ def render_momentum_dashboard() -> str:
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>DB GAPS 주식 모멘텀 대시보드</title>
   <style>
-    :root {{
-      color-scheme: light;
-      --bg: #f5f6f8;
-      --panel: #ffffff;
-      --text: #151923;
-      --muted: #687386;
-      --line: #d9dee7;
-      --accent: #1f5f99;
-      --safe: #067647;
-      --warn: #b54708;
-      --missing: #7a271a;
-    }}
-    * {{ box-sizing: border-box; }}
-    body {{
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }}
-    header {{
-      padding: 30px 24px 22px;
-      background: linear-gradient(180deg, #ffffff 0%, #eef4ff 100%);
-      border-bottom: 1px solid var(--line);
-    }}
-    main {{ max-width: 1180px; margin: 0 auto; padding: 24px; }}
-    .hero {{ max-width: 1180px; margin: 0 auto; }}
-    h1, h2 {{ margin: 0; line-height: 1.2; }}
-    h1 {{ font-size: 28px; }}
-    h2 {{ font-size: 18px; margin-bottom: 12px; }}
-    p {{ margin: 8px 0 0; color: var(--muted); }}
-    a {{ color: var(--accent); font-weight: 700; text-decoration: none; }}
-    section {{ margin-bottom: 24px; }}
-    .cards {{
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 12px;
-    }}
-    .card, .panel {{
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 14px 16px;
-    }}
-    .label {{ color: var(--muted); font-size: 12px; font-weight: 700; }}
-    .value {{ margin-top: 6px; font-size: 24px; font-weight: 800; }}
-    .grid-2 {{ display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }}
-    .badge {{
-      display: inline-block;
-      padding: 3px 8px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 700;
-      background: #edf2f7;
-      color: #344054;
-    }}
-    .badge.ok {{ background: #ecfdf3; color: var(--safe); }}
-    .badge.warn {{ background: #fffaeb; color: var(--warn); }}
-    .badge.missing {{ background: #fef3f2; color: var(--missing); }}
-    .badge.neutral {{ background: #eef4ff; color: var(--accent); }}
-    .table-wrap {{
-      overflow-x: auto;
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-    }}
-    table {{ width: 100%; min-width: 920px; border-collapse: collapse; }}
-    th, td {{
-      padding: 10px 12px;
-      border-bottom: 1px solid var(--line);
-      text-align: left;
-      vertical-align: top;
-    }}
-    th {{ background: #f0f3f8; color: #3d4758; font-size: 12px; }}
-    tr:last-child td {{ border-bottom: 0; }}
-    .guide {{ display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }}
-    .guide b {{ display: block; margin-bottom: 4px; }}
-    @media (max-width: 840px) {{
-      header {{ padding: 22px 16px 14px; }}
-      main {{ padding: 16px; }}
-      .cards, .grid-2, .guide {{ grid-template-columns: 1fr; }}
-      h1 {{ font-size: 24px; }}
-    }}
+{base_css(920)}
   </style>
 </head>
 <body>
   <header>
     <div class="hero">
-      <h1>주식 모멘텀 대시보드</h1>
-      <p>현재 보유 중인 주식 ETF 유니버스의 모멘텀만 따로 봅니다. 가격 데이터 기준일: {esc(price_data_as_of)}. 생성 시각: {esc(generated_at)}.</p>
-      <p><a href="index.html">종합 대시보드로 돌아가기</a></p>
+      <div class="hero-copy">
+        <h1>주식 모멘텀 대시보드</h1>
+        <p>ETF 리스트에 포함된 전체 주식 ETF 유니버스의 모멘텀을 봅니다. 가격 데이터 기준일: {esc(price_data_as_of)}. 생성 시각: {esc(generated_at)}.</p>
+      </div>
+      <nav class="nav-pills" aria-label="dashboard navigation">
+        <a href="index.html">종합</a>
+        <a class="active" href="momentum.html">주식 모멘텀</a>
+      </nav>
     </div>
   </header>
   <main>
@@ -751,6 +716,7 @@ def render_momentum_dashboard() -> str:
       <div class="card"><div class="label">유지</div><div class="value">{len(hold_rows)}</div></div>
       <div class="card"><div class="label">관찰</div><div class="value">{len(watch_rows)}</div></div>
       <div class="card"><div class="label">축소 후보</div><div class="value">{len(cut_rows)}</div></div>
+      <div class="card"><div class="label">전체 주식 ETF</div><div class="value">{len(equity)}</div></div>
     </section>
 
     <section class="grid-2">
@@ -774,22 +740,24 @@ def render_momentum_dashboard() -> str:
 
     <section class="grid-2">
       <div>
-        <h2>매수/확대 후보</h2>
+        <h2>매수/확대 후보 Top 12</h2>
         {build_table(buy_rows, [
           ("opportunity", "판정"),
           ("ticker", "티커"),
           ("etf_name", "ETF"),
+          ("selected", "보유"),
           ("three_month_return", "3M"),
           ("above_60d_ma", "60D 상회"),
           ("momentum_score", "점수"),
         ])}
       </div>
       <div>
-        <h2>매도/축소 후보</h2>
+        <h2>매도/축소 후보 Top 12</h2>
         {build_table(sell_rows, [
           ("opportunity", "판정"),
           ("ticker", "티커"),
           ("etf_name", "ETF"),
+          ("selected", "보유"),
           ("one_month_return", "1M"),
           ("drawdown_from_60d_high", "60D 고점 대비"),
           ("momentum_score", "점수"),
@@ -805,6 +773,7 @@ def render_momentum_dashboard() -> str:
         ("etf_name", "ETF"),
         ("competition_category", "분류"),
         ("cluster", "클러스터"),
+        ("selected", "보유"),
         ("target_weight", "현재 비중"),
         ("one_month_return", "1M"),
         ("three_month_return", "3M"),
