@@ -49,9 +49,12 @@ All stated category limits are satisfied:
 │   └── 04-report/
 ├── framework/
 │   ├── initial-portfolio.csv
+│   ├── etf-master.csv
 │   ├── monthly-rebalance-log.csv
 │   ├── proposal-ready-framework.md
 │   └── weekly-monitoring-dashboard.csv
+├── scripts/
+│   └── build-etf-master.py
 ├── 투자계획서/
 └── 제12회_GAPS_ETF_리스트_(v260509).xlsx_-_ETF.csv
 ```
@@ -61,9 +64,11 @@ All stated category limits are satisfied:
 | File | Purpose |
 |---|---|
 | `framework/initial-portfolio.csv` | June 1, 2026 target ETF portfolio |
+| `framework/etf-master.csv` | 188-row enriched ETF universe with cluster labels |
 | `framework/weekly-monitoring-dashboard.csv` | Weekly signal and decision template |
 | `framework/monthly-rebalance-log.csv` | Monthly turnover and rebalance log |
 | `framework/proposal-ready-framework.md` | Korean proposal-ready strategy text |
+| `scripts/build-etf-master.py` | Regenerates the enriched ETF master |
 | `docs/02-design/features/db-gaps-emp-framework.design.md` | Full framework design |
 | `docs/03-analysis/db-gaps-emp-framework.analysis.md` | Gap analysis and match rate |
 | `docs/04-report/db-gaps-emp-framework.report.md` | Completion report |
@@ -91,11 +96,10 @@ Monthly:
 
 PDCA status: complete.
 
-Design-to-implementation match rate: 92%.
+Design-to-implementation match rate: 100% after ETF master implementation.
 
 Remaining optional work:
 
-- Build a full 188-row enriched ETF master.
 - Add live momentum data.
 - Add live Korea foreign/institutional flow data.
 - Convert the proposal-ready Markdown into a final `.docx`.

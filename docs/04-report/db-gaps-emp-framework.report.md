@@ -2,7 +2,7 @@
 
 > Date: 2026-06-01  
 > Status: Framework implemented  
-> Match Rate: 92%
+> Match Rate: 100%
 
 ---
 
@@ -19,6 +19,7 @@ Completed outputs:
 - Weekly monitoring dashboard template.
 - Monthly rebalance log template.
 - Proposal-ready Korean framework text.
+- Full 188-row ETF master and regeneration script.
 - Gap analysis.
 
 The framework is ready to use as a structured strategy base for the DB GAPS ETF competition.
@@ -32,6 +33,8 @@ The framework is ready to use as a structured strategy base for the DB GAPS ETF 
 | Implementation guide | docs/02-design/features/db-gaps-emp-framework.do.md |
 | Gap analysis | docs/03-analysis/db-gaps-emp-framework.analysis.md |
 | Initial portfolio | framework/initial-portfolio.csv |
+| ETF master | framework/etf-master.csv |
+| ETF master build script | scripts/build-etf-master.py |
 | Weekly dashboard | framework/weekly-monitoring-dashboard.csv |
 | Monthly rebalance log | framework/monthly-rebalance-log.csv |
 | Proposal-ready text | framework/proposal-ready-framework.md |
@@ -80,7 +83,7 @@ Risk buffers:
 
 | Metric | Result |
 |---|---:|
-| Design-to-implementation match rate | 92% |
+| Design-to-implementation match rate | 100% |
 | Initial portfolio total | 100% |
 | Risk asset usage | 70% / 70% |
 | Safe asset allocation | 30% |
@@ -94,7 +97,6 @@ Risk buffers:
 
 The remaining gaps are optional operating enhancements:
 
-- Build a full 188-row enriched ETF master with cluster labels for every ETF.
 - Add live 1M/3M/6M momentum values.
 - Add live Korea foreign/institutional flow values.
 - Convert the Markdown proposal text into the final `.docx` investment plan.

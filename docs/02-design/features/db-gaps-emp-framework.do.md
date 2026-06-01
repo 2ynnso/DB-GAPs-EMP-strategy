@@ -30,6 +30,8 @@ The current implementation target is a usable investment framework, not a softwa
 | Monitoring dashboard | framework/weekly-monitoring-dashboard.csv | Complete |
 | Monthly rebalance log | framework/monthly-rebalance-log.csv | Complete |
 | Proposal-ready framework text | framework/proposal-ready-framework.md | Complete |
+| Full ETF master | framework/etf-master.csv | Complete |
+| ETF master build script | scripts/build-etf-master.py | Complete |
 
 ## 3. ETF Master Build
 
@@ -157,3 +159,4 @@ This phase is complete when:
 - All category limits pass.
 - The weekly and monthly operating rules are explicit.
 - The framework can be copied into the final proposal or spreadsheet without additional strategy design work.
+- The full 188-row ETF universe can be regenerated with `python3 scripts/build-etf-master.py`.

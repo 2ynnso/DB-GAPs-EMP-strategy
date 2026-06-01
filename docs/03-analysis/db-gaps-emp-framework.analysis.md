@@ -4,11 +4,11 @@
 
 ---
 
-## Match Rate: 92%
+## Match Rate: 100%
 
-Implemented items: 12  
+Implemented items: 13  
 Total design items: 13  
-Formula: 12 / 13 * 100 = 92.3%
+Formula: 13 / 13 * 100 = 100%
 
 ## Summary
 
@@ -24,7 +24,7 @@ The implementation now includes:
 - Monthly rebalance log template.
 - Proposal-ready Korean framework text.
 
-The only material gap is that the ETF master is represented through the selected portfolio and cluster rules, not yet as a complete 188-row enriched ETF master with cluster labels for every ETF in the universe. This does not block the strategy framework, but it would improve repeatability if the team wants full automation.
+The prior material gap has been closed. The framework now includes a complete 188-row enriched ETF master and a regeneration script.
 
 ## Implemented Items
 
@@ -41,6 +41,7 @@ The only material gap is that the ETF master is represented through the selected
 - [x] Weekly monitoring dashboard template created.
 - [x] Monthly rebalance log template created.
 - [x] Proposal-ready Korean narrative created.
+- [x] Full 188-row ETF master created.
 
 ## Constraint Verification
 
@@ -62,11 +63,10 @@ The only material gap is that the ETF master is represented through the selected
 
 ## Missing Items
 
-- [ ] Full 188-row enriched ETF master with cluster and same-exposure labels for every ETF.
 - [ ] Live 1M/3M/6M ETF momentum values.
 - [ ] Live Korea foreign/institutional flow data feed.
 
-These are operational data gaps, not strategy-design gaps.
+These are live market-data gaps, not framework implementation gaps.
 
 ## Changed Items
 
@@ -76,14 +76,13 @@ These are operational data gaps, not strategy-design gaps.
 
 ## Recommendations
 
-1. Proceed to report if the immediate objective is a completed framework package.
-2. If the team wants full monitoring automation, build the enriched 188-row ETF master next.
-3. Before actual trading or competition submission, update price momentum and flow values using the team's chosen data source.
-4. Keep the overseas equity sector cap at 10%; do not reuse the previous 18% allocation without confirming that the competition limit differs.
+1. Proceed with the framework package as complete.
+2. Before actual trading or competition submission, update price momentum and flow values using the team's chosen data source.
+3. Keep the overseas equity sector cap at 10%; do not reuse the previous 18% allocation without confirming that the competition limit differs.
 
 ## Next Steps
 
 - [x] Framework implementation is ready for use.
-- [ ] Optional: create a full ETF master spreadsheet.
+- [x] Full ETF master spreadsheet created.
 - [ ] Optional: convert the proposal-ready Markdown into the final `.docx` investment plan.
 - [ ] Recommended PDCA next action: report phase.
