@@ -790,7 +790,6 @@ def render_momentum_dashboard() -> str:
         ("etf_name", "ETF"),
         ("competition_category", "분류"),
         ("cluster", "클러스터"),
-        ("selected", "보유"),
         ("one_month_return", "1M"),
         ("three_month_return", "3M"),
         ("six_month_return", "6M"),
