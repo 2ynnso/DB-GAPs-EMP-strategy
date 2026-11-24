@@ -1,132 +1,132 @@
 price_data_as_of,ticker,etf_name,competition_category,cluster,target_weight,selected,one_month_return,three_month_return,six_month_return,above_20d_ma,above_60d_ma,drawdown_from_60d_high,relative_rank,momentum_score,decision,opportunity,data_source
-2026-11-23,A453810,KODEX 인도Nifty50,해외주식_지수,Core Equity Beta,0,N,18.15%,4.47%,-0.84%,Y,Y,0.00%,1/130,89.5,Add,매수/확대 후보,Yahoo Finance chart API
-2026-11-23,A453870,TIGER 인도니프티50,해외주식_지수,Core Equity Beta,0,N,18.25%,4.34%,-1.42%,Y,Y,0.00%,2/130,89.3,Add,매수/확대 후보,Yahoo Finance chart API
-2026-11-23,A200250,KIWOOM 인도Nifty50(합성),해외주식_지수,Core Equity Beta,0,N,17.93%,4.31%,-0.85%,Y,Y,0.00%,3/130,89.0,Add,매수/확대 후보,Yahoo Finance chart API
-2026-11-23,A453630,KODEX 미국S&P500필수소비재,해외주식_섹터,Core Equity Beta,0,N,2.56%,2.73%,-4.59%,Y,Y,-1.18%,4/130,88.8,Add,매수/확대 후보,Yahoo Finance chart API
-2026-11-23,A460660,RISE 미국S&P배당킹,해외주식_섹터,Satellite Equity,0,N,2.35%,-3.31%,2.57%,Y,Y,-2.64%,8/130,84.4,Add,매수/확대 후보,Yahoo Finance chart API
-2026-11-23,A463640,KODEX 미국S&P500유틸리티,해외주식_섹터,AI Power Infrastructure,0,N,2.48%,-4.38%,-9.79%,Y,Y,-2.67%,9/130,73.6,Hold,보유 유지,Yahoo Finance chart API
-2026-11-23,A429000,TIGER 미국S&P500배당귀족,해외주식_섹터,Core Equity Beta,0,N,2.78%,-2.45%,-0.44%,N,Y,-3.15%,6/130,58.9,Watch,관찰 후보,Yahoo Finance chart API
-2026-11-23,A291130,ACE 멕시코MSCI(합성),해외주식_지수,Core Equity Beta,0,N,1.89%,-4.63%,-13.48%,N,Y,-6.21%,10/130,58.0,Watch,관찰 후보,Yahoo Finance chart API
-2026-11-23,A453660,KODEX 미국S&P500경기소비재,해외주식_섹터,Core Equity Beta,0,N,1.28%,-6.24%,-11.07%,N,Y,-5.31%,17/130,56.4,Watch,관찰 후보,Yahoo Finance chart API
-2026-11-23,A453640,KODEX 미국S&P500헬스케어,해외주식_섹터,Core Equity Beta,0,N,-0.59%,-2.27%,9.28%,N,Y,-7.14%,5/130,55.7,Watch,관찰 후보,Yahoo Finance chart API
-2026-11-23,A352560,KODEX 미국부동산리츠(H),해외주식_섹터,Satellite Equity,0,N,0.04%,-6.19%,-3.24%,N,N,-5.93%,15/130,46.3,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A452360,SOL 미국배당다우존스(H),해외주식_섹터,Satellite Equity,0,N,-3.69%,-3.13%,5.56%,N,N,-6.17%,7/130,44.7,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A227540,TIGER 200 헬스케어,국내주식_섹터,Core Equity Beta,0,N,0.14%,-6.99%,-2.75%,N,N,-10.40%,18/130,40.0,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A256440,ACE 인도네시아MSCI(합성),해외주식_지수,Core Equity Beta,0,N,4.38%,-18.92%,-29.70%,Y,N,-19.98%,72/130,38.0,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A195930,TIGER 유로스탁스50(합성 H),해외주식_지수,Core Equity Beta,0,N,-2.07%,-8.24%,1.75%,N,N,-8.68%,22/130,35.6,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A379790,RISE 유로스탁스50(H),해외주식_지수,Core Equity Beta,0,N,-2.43%,-8.72%,0.50%,N,N,-9.00%,24/130,35.2,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A446720,SOL 미국배당다우존스,해외주식_섹터,Satellite Equity,0,N,-1.66%,-5.92%,-4.95%,N,N,-5.46%,11/130,33.3,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A458730,TIGER 미국배당다우존스,해외주식_섹터,Satellite Equity,0,N,-1.82%,-5.98%,-5.06%,N,N,-5.71%,12/130,33.0,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A402970,ACE 미국배당다우존스,해외주식_섹터,Satellite Equity,0,N,-1.76%,-6.01%,-4.95%,N,N,-5.89%,13/130,32.8,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A493420,SOL 미국배당다우존스TR,해외주식_섹터,Satellite Equity,0,N,-1.91%,-6.06%,-4.79%,N,N,-5.74%,14/130,32.6,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A182480,TIGER 미국MSCI리츠(합성 H),해외주식_섹터,Satellite Equity,0,N,-0.27%,-6.21%,-4.17%,N,N,-7.41%,16/130,32.1,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A453650,KODEX 미국S&P500금융,해외주식_섹터,Core Equity Beta,0,N,-1.06%,-7.11%,-4.18%,N,N,-7.65%,19/130,31.4,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A488500,TIGER 미국S&P500동일가중,해외주식_지수,Core Equity Beta,0,N,-2.29%,-8.39%,-6.75%,N,N,-7.61%,23/130,30.5,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A218420,KODEX 미국S&P500에너지(합성),해외주식_섹터,Core Equity Beta,0,N,-8.98%,-7.32%,-9.97%,N,N,-12.57%,20/130,25.6,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A245710,ACE 베트남VN30(합성),해외주식_지수,Core Equity Beta,0,N,-3.14%,-7.97%,-19.85%,N,N,-11.47%,21/130,25.3,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A219480,KODEX 미국S&P500선물(H),해외주식_지수,Core Equity Beta,0,N,-7.98%,-8.89%,-5.25%,N,N,-10.00%,25/130,24.4,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A449180,KODEX 미국S&P500(H),해외주식_지수,Core Equity Beta,0,N,-8.24%,-8.91%,-5.28%,N,N,-10.18%,26/130,24.2,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A448290,TIGER 미국S&P500TR(H),해외주식_지수,Core Equity Beta,0,N,-8.27%,-9.01%,-5.47%,N,N,-10.17%,27/130,24.0,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A195970,PLUS 선진국MSCI(합성 H),해외주식_지수,Core Equity Beta,0,N,-4.35%,-9.30%,-3.77%,N,N,-9.62%,28/130,23.7,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A091170,KODEX 은행,국내주식_섹터,Satellite Equity,0,N,-2.22%,-9.34%,-6.53%,N,N,-19.28%,29/130,23.5,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A143850,TIGER 미국S&P500선물(H),해외주식_지수,Core Equity Beta,0,N,-8.10%,-9.39%,-6.17%,N,N,-10.19%,30/130,23.3,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A189400,PLUS 글로벌MSCI(합성 H),해외주식_지수,Core Equity Beta,0,N,-6.17%,-9.42%,-5.76%,N,N,-10.02%,31/130,23.0,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A195920,TIGER 일본TOPIX(합성 H),해외주식_지수,Core Equity Beta,0,N,-9.90%,-10.40%,-6.48%,N,N,-14.11%,32/130,22.8,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A174350,TIGER 로우볼,국내주식_섹터,Satellite Equity,0,N,-5.89%,-10.67%,-8.99%,N,N,-13.31%,33/130,22.6,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A245350,TIGER 유로스탁스배당30,해외주식_섹터,Satellite Equity,0,N,-0.20%,-11.37%,-13.18%,N,N,-11.35%,34/130,22.3,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A251350,KODEX 선진국MSCI World,해외주식_지수,Core Equity Beta,0,N,-5.36%,-11.48%,-13.64%,N,N,-10.73%,35/130,22.1,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A360750,TIGER 미국S&P500,해외주식_지수,Core Equity Beta,13,Y,-6.43%,-11.57%,-14.56%,N,N,-10.54%,36/130,21.9,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A360200,ACE 미국S&P500,해외주식_지수,Core Equity Beta,0,N,-6.49%,-11.61%,-14.62%,N,N,-10.56%,37/130,21.6,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A379780,RISE 미국S&P500,해외주식_지수,Core Equity Beta,0,N,-6.32%,-11.68%,-14.65%,N,N,-10.61%,38/130,21.4,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A250730,RISE 차이나HSCEI(H),해외주식_지수,Core Equity Beta,0,N,-2.46%,-11.80%,-11.67%,N,N,-11.71%,39/130,21.2,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A466940,TIGER 은행고배당플러스TOP10,국내주식_섹터,Satellite Equity,0,N,-4.65%,-11.83%,-10.41%,N,N,-20.54%,40/130,20.9,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A245340,TIGER 미국다우존스30,해외주식_지수,Core Equity Beta,0,N,-6.04%,-11.89%,-12.08%,N,N,-11.56%,41/130,20.7,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A379800,KODEX 미국S&P500,해외주식_지수,Core Equity Beta,0,N,-6.76%,-11.90%,-15.13%,N,N,-10.85%,42/130,20.5,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A463690,KODEX 미국S&P500커뮤니케이션,해외주식_섹터,Core Equity Beta,0,N,-4.18%,-12.17%,-21.94%,N,N,-12.51%,43/130,20.2,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A499150,SOL 미국S&P500엔화노출(H),해외주식_지수,Core Equity Beta,0,N,-7.59%,-12.27%,-16.09%,N,N,-12.39%,44/130,20.0,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A227560,TIGER 200 생활소비재,국내주식_섹터,Core Equity Beta,0,N,-5.77%,-12.64%,-15.06%,N,N,-18.58%,45/130,19.8,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A465580,ACE 미국빅테크TOP7 Plus,해외주식_섹터,Satellite Equity,0,N,-8.41%,-12.84%,-17.96%,N,N,-14.79%,46/130,19.5,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A448300,TIGER 미국나스닥100TR(H),해외주식_지수,Core Equity Beta,0,N,-11.41%,-13.19%,-11.61%,N,N,-17.63%,47/130,19.3,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A304940,KODEX 미국나스닥100선물(H),해외주식_지수,Core Equity Beta,0,N,-11.40%,-13.34%,-11.81%,N,N,-17.53%,48/130,19.1,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A411860,KIWOOM 독일DAX,해외주식_지수,Core Equity Beta,0,N,-2.40%,-13.56%,-15.67%,N,N,-13.39%,49/130,18.8,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A280930,KODEX 미국러셀2000(H),해외주식_지수,Core Equity Beta,0,N,-5.71%,-14.07%,-6.28%,N,N,-13.36%,50/130,18.6,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A381170,TIGER 미국테크TOP10 INDXX,해외주식_섹터,Satellite Equity,0,N,-10.77%,-14.36%,-23.72%,N,N,-17.33%,51/130,18.4,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A101280,KODEX 일본TOPIX100,해외주식_지수,Core Equity Beta,0,N,-10.05%,-14.58%,-15.43%,N,N,-16.24%,52/130,18.1,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A227570,TIGER 우량가치,국내주식_섹터,Satellite Equity,0,N,-8.99%,-14.71%,-21.43%,N,N,-18.23%,53/130,17.9,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A192090,TIGER 차이나CSI300,해외주식_지수,Core Equity Beta,0,N,-1.16%,-14.76%,-24.88%,N,N,-14.79%,54/130,17.7,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A139270,TIGER 200 금융,국내주식_섹터,Core Equity Beta,0,N,-6.68%,-15.03%,-16.57%,N,N,-22.14%,55/130,17.4,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A245360,TIGER 차이나HSCEI,해외주식_지수,Core Equity Beta,0,N,-2.78%,-15.16%,-21.67%,N,N,-14.92%,56/130,17.2,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A168580,ACE 중국본토CSI300,해외주식_지수,Core Equity Beta,0,N,-1.96%,-15.46%,-24.16%,N,N,-15.26%,57/130,17.0,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A238720,ACE 일본Nikkei225(H),해외주식_지수,Core Equity Beta,0,N,-10.96%,-15.51%,-6.96%,N,N,-21.21%,58/130,16.7,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A099140,KODEX 차이나H,해외주식_지수,Core Equity Beta,0,N,-3.10%,-15.54%,-22.36%,N,N,-14.76%,59/130,16.5,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A133690,TIGER 미국나스닥100,해외주식_지수,AI & Semiconductors,12,Y,-9.86%,-15.70%,-20.32%,N,N,-17.28%,60/130,16.3,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A367380,ACE 미국나스닥100,해외주식_지수,Core Equity Beta,0,N,-9.88%,-15.71%,-20.31%,N,N,-17.25%,61/130,16.0,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A379810,KODEX 미국나스닥100,해외주식_지수,Core Equity Beta,0,N,-9.91%,-15.73%,-20.48%,N,N,-17.31%,62/130,15.8,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A200030,KODEX 미국S&P500산업재(합성),해외주식_섹터,Korea Cyclical Alpha,0,N,-3.41%,-15.83%,-16.84%,N,N,-14.44%,63/130,15.6,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A283580,KODEX 차이나CSI300,해외주식_지수,Core Equity Beta,0,N,-2.73%,-16.19%,-25.57%,N,N,-16.41%,64/130,15.3,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A494410,PLUS 미국S&P500성장주,해외주식_섹터,Core Equity Beta,0,N,-10.91%,-16.31%,-20.07%,N,N,-17.74%,65/130,15.1,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A310080,RISE 중국MSCI China(H),해외주식_지수,Core Equity Beta,0,N,-5.04%,-16.32%,-18.18%,N,N,-16.94%,66/130,14.9,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A195980,PLUS 신흥국MSCI(합성 H),해외주식_지수,Core Equity Beta,0,N,-9.71%,-17.03%,-12.81%,N,N,-19.06%,67/130,14.7,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A105010,TIGER 라틴35,해외주식_지수,Core Equity Beta,0,N,-21.94%,-17.36%,-28.79%,N,N,-25.00%,68/130,14.4,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A161510,PLUS 고배당주,국내주식_섹터,Satellite Equity,0,N,-9.62%,-17.70%,-22.73%,N,N,-20.81%,69/130,14.2,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A457480,ACE 테슬라밸류체인액티브,해외주식_섹터,Satellite Equity,0,N,-8.34%,-18.28%,-35.54%,N,N,-19.39%,70/130,14.0,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A241180,TIGER 일본니케이225,해외주식_지수,Core Equity Beta,0,N,-10.30%,-18.44%,-17.15%,N,N,-21.57%,71/130,13.7,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A261920,ACE 필리핀MSCI(합성),해외주식_지수,Core Equity Beta,0,N,-6.00%,-19.84%,-21.50%,N,N,-20.34%,73/130,13.3,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A463680,KODEX 미국S&P500테크놀로지,해외주식_섹터,Core Equity Beta,0,N,-14.61%,-19.90%,-23.31%,N,N,-23.36%,74/130,13.0,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A185680,KODEX 미국S&P바이오(합성),해외주식_섹터,Satellite Equity,0,N,-5.23%,-20.06%,-0.72%,N,N,-18.74%,75/130,12.8,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A139290,TIGER 200 경기소비재,국내주식_섹터,Core Equity Beta,0,N,-2.94%,-20.91%,-31.49%,N,N,-20.70%,76/130,12.6,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A315270,TIGER 200커뮤니케이션서비스,국내주식_섹터,Core Equity Beta,0,N,-8.46%,-22.41%,-27.35%,N,N,-23.94%,77/130,12.3,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A305720,KODEX 2차전지산업,국내주식_섹터,Satellite Equity,0,N,-18.52%,-22.85%,-40.16%,N,N,-30.94%,78/130,12.1,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A287180,PLUS 미국나스닥테크,해외주식_섹터,Satellite Equity,0,N,-15.09%,-22.96%,-22.12%,N,N,-25.65%,79/130,11.9,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A371460,TIGER 차이나전기차SOLACTIVE,해외주식_섹터,Satellite Equity,0,N,-1.64%,-23.15%,-42.14%,N,N,-22.82%,80/130,11.6,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A305540,TIGER 2차전지테마,국내주식_섹터,Satellite Equity,0,N,-20.06%,-23.44%,-39.81%,N,N,-32.07%,81/130,11.4,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A462010,TIGER 2차전지소재Fn,국내주식_섹터,Satellite Equity,0,N,-13.67%,-23.66%,-46.38%,N,N,-32.28%,82/130,11.2,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A139220,TIGER 200 건설,국내주식_섹터,Core Equity Beta,0,N,-18.10%,-24.22%,-35.02%,N,N,-31.68%,83/130,10.9,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A445290,KODEX 로봇액티브,국내주식_섹터,Satellite Equity,0,N,-7.78%,-26.97%,-36.69%,N,N,-27.48%,84/130,10.7,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A414780,TIGER 차이나과창판STAR50(합성),해외주식_지수,Core Equity Beta,0,N,-6.79%,-27.45%,-36.93%,N,N,-28.73%,85/130,10.5,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A497570,TIGER 미국필라델피아AI반도체나스닥,해외주식_섹터,AI & Semiconductors,6,Y,-18.75%,-27.83%,-29.14%,N,N,-33.30%,86/130,10.2,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A139240,TIGER 200 철강소재,국내주식_섹터,Core Equity Beta,0,N,-11.98%,-27.88%,-43.83%,N,N,-33.32%,87/130,10.0,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A381180,TIGER 미국필라델피아반도체나스닥,해외주식_지수,AI & Semiconductors,0,N,-18.04%,-28.59%,-30.18%,N,N,-33.38%,88/130,9.8,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A371160,TIGER 차이나항셍테크,해외주식_지수,Core Equity Beta,0,N,-8.37%,-28.79%,-35.85%,N,N,-26.97%,89/130,9.5,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A390390,KODEX 미국반도체,해외주식_섹터,AI & Semiconductors,0,N,-19.97%,-28.82%,-31.21%,N,N,-33.97%,90/130,9.3,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A372330,KODEX 차이나항셍테크,해외주식_지수,Core Equity Beta,0,N,-8.99%,-28.96%,-36.10%,N,N,-27.24%,91/130,9.1,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A232080,TIGER 코스닥150,국내주식_지수,Core Equity Beta,0,N,-16.53%,-28.99%,-42.90%,N,N,-34.43%,92/130,8.8,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A229200,KODEX 코스닥150,국내주식_지수,Core Equity Beta,0,N,-16.68%,-29.08%,-42.86%,N,N,-34.61%,93/130,8.6,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A455850,SOL AI반도체소부장,국내주식_섹터,AI & Semiconductors,0,N,-23.24%,-29.37%,-40.19%,N,N,-46.80%,94/130,8.4,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A102780,KODEX 삼성그룹,국내주식_섹터,Satellite Equity,0,N,-17.55%,-29.58%,-27.20%,N,N,-31.75%,95/130,8.1,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A315930,KODEX Top5PlusTR,국내주식_섹터,Satellite Equity,0,N,-12.91%,-30.07%,-33.33%,N,N,-31.50%,96/130,7.9,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A227550,TIGER 200 산업재,국내주식_섹터,Korea Cyclical Alpha,0,N,-16.67%,-30.28%,-41.39%,N,N,-32.53%,97/130,7.7,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A328370,PLUS 코스피TR,국내주식_지수,Core Equity Beta,0,N,-15.58%,-30.77%,-35.22%,N,N,-33.03%,98/130,7.4,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A226490,KODEX 코스피,국내주식_지수,Core Equity Beta,0,N,-14.87%,-30.94%,-35.08%,N,N,-32.92%,99/130,7.2,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A456600,TIME 글로벌AI인공지능액티브,해외주식_섹터,Satellite Equity,0,N,-20.88%,-30.98%,-34.01%,N,N,-33.30%,100/130,7.0,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A302450,RISE 코스피,국내주식_지수,Core Equity Beta,0,N,-15.85%,-31.10%,-35.06%,N,N,-33.34%,101/130,6.7,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A277630,TIGER 코스피,국내주식_지수,Core Equity Beta,0,N,-15.27%,-31.12%,-35.18%,N,N,-33.10%,102/130,6.5,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A091180,KODEX 자동차,국내주식_섹터,Satellite Equity,0,N,-12.79%,-31.17%,-41.27%,N,N,-29.42%,103/130,6.3,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A446770,ACE 글로벌반도체TOP4 Plus,해외주식_섹터,AI & Semiconductors,0,N,-21.17%,-31.31%,-33.30%,N,N,-35.59%,104/130,6.0,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A294400,KIWOOM 200TR,국내주식_지수,Core Equity Beta,0,N,-15.26%,-31.71%,-35.17%,N,N,-34.77%,105/130,5.8,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A295040,SOL 200TR,국내주식_지수,Core Equity Beta,0,N,-15.37%,-31.72%,-35.15%,N,N,-34.70%,106/130,5.6,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A156080,KODEX MSCI Korea,국내주식_지수,Core Equity Beta,0,N,-15.11%,-31.73%,-34.79%,N,N,-35.20%,107/130,5.3,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A278530,KODEX 200TR,국내주식_지수,Core Equity Beta,0,N,-15.24%,-31.73%,-35.24%,N,N,-34.69%,108/130,5.1,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A069500,KODEX 200,국내주식_지수,Core Equity Beta,10,Y,-15.28%,-31.81%,-35.47%,N,N,-34.80%,109/130,4.9,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A361580,RISE 200TR,국내주식_지수,Core Equity Beta,0,N,-15.25%,-31.84%,-35.30%,N,N,-34.77%,110/130,4.7,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A139250,TIGER 200 에너지화학,국내주식_섹터,Core Equity Beta,0,N,-19.54%,-32.02%,-36.85%,N,N,-37.08%,111/130,4.4,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A148020,RISE 200,국내주식_지수,Core Equity Beta,0,N,-15.72%,-32.19%,-35.78%,N,N,-35.10%,112/130,4.2,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A152100,PLUS 200,국내주식_지수,Core Equity Beta,0,N,-16.00%,-32.22%,-35.83%,N,N,-35.15%,113/130,4.0,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A102110,TIGER 200,국내주식_지수,Core Equity Beta,0,N,-16.02%,-32.26%,-35.77%,N,N,-35.21%,114/130,3.7,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A278540,KODEX MSCI Korea TR,국내주식_지수,Core Equity Beta,0,N,-15.43%,-32.40%,-35.02%,N,N,-35.26%,115/130,3.5,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A325010,KODEX 성장주,국내주식_섹터,Satellite Equity,0,N,-15.86%,-32.54%,-36.23%,N,N,-35.34%,116/130,3.3,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A147970,TIGER 모멘텀,국내주식_섹터,Satellite Equity,0,N,-16.69%,-33.65%,-41.28%,N,N,-35.72%,117/130,3.0,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A091160,KODEX 반도체,국내주식_섹터,AI & Semiconductors,0,N,-22.53%,-34.40%,-40.62%,N,N,-44.82%,118/130,2.8,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A487230,KODEX 미국AI전력핵심인프라,해외주식_섹터,AI Power Infrastructure,4,Y,-15.25%,-34.80%,-48.19%,N,N,-36.27%,119/130,2.6,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A363580,KODEX 200IT TR,국내주식_섹터,Core Equity Beta,0,N,-18.57%,-36.26%,-33.78%,N,N,-40.95%,120/130,2.3,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A139260,TIGER 200 IT,국내주식_섹터,Core Equity Beta,0,N,-19.35%,-36.68%,-35.92%,N,N,-41.49%,121/130,2.1,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A395270,HANARO Fn K-반도체,국내주식_섹터,AI & Semiconductors,0,N,-18.98%,-36.68%,-32.59%,N,N,-41.89%,122/130,1.9,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A395160,KODEX AI반도체,국내주식_섹터,AI & Semiconductors,8,Y,-18.77%,-37.24%,-31.61%,N,N,-41.71%,123/130,1.6,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A487240,KODEX AI전력핵심설비,국내주식_섹터,AI Power Infrastructure,0,N,-22.14%,-42.07%,-59.59%,N,N,-46.12%,124/130,1.4,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A434730,HANARO 원자력iSelect,국내주식_섹터,AI Power Infrastructure,0,N,-25.03%,-42.60%,-56.87%,N,N,-48.35%,125/130,1.2,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A494670,TIGER 조선TOP10,국내주식_섹터,Korea Cyclical Alpha,0,N,-19.37%,-42.97%,-54.41%,N,N,-44.00%,126/130,0.9,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A466920,SOL 조선TOP3플러스,국내주식_섹터,Korea Cyclical Alpha,4,Y,-19.74%,-43.66%,-55.26%,N,N,-44.50%,127/130,0.7,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A139230,TIGER 200 중공업,국내주식_섹터,Korea Cyclical Alpha,0,N,-23.20%,-45.26%,-58.94%,N,N,-48.26%,128/130,0.5,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A463250,TIGER K방산&우주,국내주식_섹터,Korea Cyclical Alpha,0,N,-24.03%,-47.44%,-56.91%,N,N,-47.03%,129/130,0.2,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A449450,PLUS K방산,국내주식_섹터,Korea Cyclical Alpha,3,Y,-25.43%,-49.79%,-59.16%,N,N,-49.59%,130/130,0.0,Cut,매도/축소 후보,Yahoo Finance chart API
-2026-11-23,A310970,TIGER MSCI Korea TR,국내주식_지수,Core Equity Beta,0,N,,,,,,,,,Watch,데이터 확인 필요,Fetch failed: failed to fetch Yahoo chart data for 310970.KS: 310970.KS returned only 1 valid closes
+2026-11-24,A453630,KODEX 미국S&P500필수소비재,해외주식_섹터,Core Equity Beta,0,N,3.90%,4.03%,-5.15%,Y,Y,-1.90%,1/130,89.5,Add,매수/확대 후보,Yahoo Finance chart API
+2026-11-24,A453810,KODEX 인도Nifty50,해외주식_지수,Core Equity Beta,0,N,16.13%,3.77%,-1.41%,Y,Y,-1.29%,2/130,89.3,Add,매수/확대 후보,Yahoo Finance chart API
+2026-11-24,A453870,TIGER 인도니프티50,해외주식_지수,Core Equity Beta,0,N,16.85%,3.63%,-1.92%,Y,Y,-1.28%,3/130,89.0,Add,매수/확대 후보,Yahoo Finance chart API
+2026-11-24,A200250,KIWOOM 인도Nifty50(합성),해외주식_지수,Core Equity Beta,0,N,16.35%,3.60%,-0.97%,Y,Y,-0.80%,4/130,88.8,Add,매수/확대 후보,Yahoo Finance chart API
+2026-11-24,A453640,KODEX 미국S&P500헬스케어,해외주식_섹터,Core Equity Beta,0,N,1.11%,0.97%,8.88%,N,Y,-6.15%,5/130,83.7,Add,매수/확대 후보,Yahoo Finance chart API
+2026-11-24,A460660,RISE 미국S&P배당킹,해외주식_섹터,Satellite Equity,0,N,4.06%,-2.01%,1.88%,Y,Y,-3.05%,8/130,79.5,Hold,보유 유지,Yahoo Finance chart API
+2026-11-24,A227540,TIGER 200 헬스케어,국내주식_섹터,Core Equity Beta,0,N,4.86%,-2.64%,1.10%,N,Y,-6.64%,9/130,68.7,Hold,보유 유지,Yahoo Finance chart API
+2026-11-24,A463640,KODEX 미국S&P500유틸리티,해외주식_섹터,AI Power Infrastructure,0,N,2.19%,-3.74%,-12.92%,Y,Y,-3.64%,11/130,68.3,Hold,보유 유지,Yahoo Finance chart API
+2026-11-24,A429000,TIGER 미국S&P500배당귀족,해외주식_섹터,Core Equity Beta,0,N,2.99%,-1.93%,-1.03%,N,Y,-3.55%,7/130,58.7,Watch,관찰 후보,Yahoo Finance chart API
+2026-11-24,A453660,KODEX 미국S&P500경기소비재,해외주식_섹터,Core Equity Beta,0,N,3.91%,-3.40%,-9.12%,N,Y,-4.01%,10/130,58.0,Watch,관찰 후보,Yahoo Finance chart API
+2026-11-24,A195930,TIGER 유로스탁스50(합성 H),해외주식_지수,Core Equity Beta,0,N,0.47%,-4.65%,4.73%,N,N,-6.23%,16/130,56.6,Watch,관찰 후보,Yahoo Finance chart API
+2026-11-24,A379790,RISE 유로스탁스50(H),해외주식_지수,Core Equity Beta,0,N,0.18%,-6.20%,2.35%,N,N,-7.47%,23/130,55.0,Watch,관찰 후보,Yahoo Finance chart API
+2026-11-24,A091170,KODEX 은행,국내주식_섹터,Satellite Equity,0,N,5.18%,-7.50%,-1.44%,Y,N,-16.11%,28/130,48.2,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A453650,KODEX 미국S&P500금융,해외주식_섹터,Core Equity Beta,0,N,0.49%,-4.97%,-2.61%,N,N,-7.30%,17/130,45.9,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A452360,SOL 미국배당다우존스(H),해외주식_섹터,Satellite Equity,0,N,-2.79%,-1.58%,6.17%,N,N,-5.33%,6/130,44.9,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A182480,TIGER 미국MSCI리츠(합성 H),해외주식_섹터,Satellite Equity,0,N,0.38%,-5.75%,-3.14%,N,N,-6.56%,21/130,44.9,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A139290,TIGER 200 경기소비재,국내주식_섹터,Core Equity Beta,0,N,6.61%,-14.91%,-25.10%,Y,N,-14.25%,69/130,38.7,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A445290,KODEX 로봇액티브,국내주식_섹터,Satellite Equity,0,N,3.81%,-15.89%,-26.71%,Y,N,-18.12%,75/130,37.3,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A256440,ACE 인도네시아MSCI(합성),해외주식_지수,Core Equity Beta,0,N,5.94%,-18.39%,-27.83%,Y,N,-18.39%,80/130,36.1,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A195920,TIGER 일본TOPIX(합성 H),해외주식_지수,Core Equity Beta,0,N,-5.74%,-7.21%,1.05%,N,N,-10.02%,26/130,34.7,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A466940,TIGER 은행고배당플러스TOP10,국내주식_섹터,Satellite Equity,0,N,3.16%,-9.40%,-5.74%,N,N,-17.04%,43/130,34.2,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A463690,KODEX 미국S&P500커뮤니케이션,해외주식_섹터,Core Equity Beta,0,N,0.03%,-9.44%,-20.62%,N,N,-11.22%,44/130,34.0,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A458730,TIGER 미국배당다우존스,해외주식_섹터,Satellite Equity,0,N,-1.01%,-4.28%,-4.87%,N,N,-5.09%,12/130,33.0,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A493420,SOL 미국배당다우존스TR,해외주식_섹터,Satellite Equity,0,N,-0.80%,-4.31%,-4.61%,N,N,-4.75%,13/130,32.8,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A402970,ACE 미국배당다우존스,해외주식_섹터,Satellite Equity,0,N,-1.13%,-4.37%,-4.77%,N,N,-5.26%,14/130,32.6,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A446720,SOL 미국배당다우존스,해외주식_섹터,Satellite Equity,0,N,-1.33%,-4.46%,-4.93%,N,N,-5.03%,15/130,32.3,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A449180,KODEX 미국S&P500(H),해외주식_지수,Core Equity Beta,0,N,-5.25%,-5.45%,-2.30%,N,N,-7.64%,18/130,31.6,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A448290,TIGER 미국S&P500TR(H),해외주식_지수,Core Equity Beta,0,N,-5.19%,-5.53%,-2.51%,N,N,-7.57%,19/130,31.4,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A219480,KODEX 미국S&P500선물(H),해외주식_지수,Core Equity Beta,0,N,-5.09%,-5.62%,-2.49%,N,N,-7.58%,20/130,31.2,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A143850,TIGER 미국S&P500선물(H),해외주식_지수,Core Equity Beta,0,N,-5.03%,-5.87%,-3.18%,N,N,-7.53%,22/130,30.7,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A200030,KODEX 미국S&P500산업재(합성),해외주식_섹터,Korea Cyclical Alpha,0,N,0.01%,-12.59%,-14.39%,N,N,-12.68%,59/130,30.5,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A488500,TIGER 미국S&P500동일가중,해외주식_지수,Core Equity Beta,0,N,-0.78%,-6.52%,-5.83%,N,N,-6.96%,24/130,30.3,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A352560,KODEX 미국부동산리츠(H),해외주식_섹터,Satellite Equity,0,N,-0.25%,-6.57%,-4.07%,N,N,-6.09%,25/130,30.0,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A139270,TIGER 200 금융,국내주식_섹터,Core Equity Beta,0,N,0.03%,-13.32%,-11.55%,N,N,-18.83%,63/130,29.6,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A185680,KODEX 미국S&P바이오(합성),해외주식_섹터,Satellite Equity,0,N,-0.09%,-13.06%,3.84%,N,N,-15.16%,62/130,26.3,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A291130,ACE 멕시코MSCI(합성),해외주식_지수,Core Equity Beta,0,N,-1.18%,-7.28%,-16.68%,N,N,-9.11%,27/130,24.0,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A245710,ACE 베트남VN30(합성),해외주식_지수,Core Equity Beta,0,N,-3.63%,-7.66%,-18.28%,N,N,-11.11%,29/130,23.5,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A189400,PLUS 글로벌MSCI(합성 H),해외주식_지수,Core Equity Beta,0,N,-5.59%,-8.14%,-3.74%,N,N,-9.14%,30/130,23.3,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A360750,TIGER 미국S&P500,해외주식_지수,Core Equity Beta,13,Y,-3.75%,-8.20%,-12.28%,N,N,-8.44%,31/130,23.0,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A360200,ACE 미국S&P500,해외주식_지수,Core Equity Beta,0,N,-3.71%,-8.20%,-12.23%,N,N,-8.42%,32/130,22.8,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A465580,ACE 미국빅테크TOP7 Plus,해외주식_섹터,Satellite Equity,0,N,-4.94%,-8.22%,-14.64%,N,N,-11.91%,33/130,22.6,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A379780,RISE 미국S&P500,해외주식_지수,Core Equity Beta,0,N,-3.48%,-8.22%,-12.19%,N,N,-8.40%,34/130,22.3,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A379800,KODEX 미국S&P500,해외주식_지수,Core Equity Beta,0,N,-3.99%,-8.49%,-12.76%,N,N,-8.70%,35/130,22.1,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A499150,SOL 미국S&P500엔화노출(H),해외주식_지수,Core Equity Beta,0,N,-4.26%,-8.76%,-13.69%,N,N,-9.88%,36/130,21.9,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A195970,PLUS 선진국MSCI(합성 H),해외주식_지수,Core Equity Beta,0,N,-3.81%,-8.77%,-2.26%,N,N,-9.23%,37/130,21.6,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A245340,TIGER 미국다우존스30,해외주식_지수,Core Equity Beta,0,N,-3.60%,-8.86%,-10.19%,N,N,-9.88%,38/130,21.4,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A174350,TIGER 로우볼,국내주식_섹터,Satellite Equity,0,N,-2.09%,-8.94%,-4.90%,N,N,-11.56%,39/130,21.2,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A448300,TIGER 미국나스닥100TR(H),해외주식_지수,Core Equity Beta,0,N,-7.65%,-9.05%,-8.36%,N,N,-14.47%,40/130,20.9,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A304940,KODEX 미국나스닥100선물(H),해외주식_지수,Core Equity Beta,0,N,-7.63%,-9.13%,-8.59%,N,N,-14.38%,41/130,20.7,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A218420,KODEX 미국S&P500에너지(합성),해외주식_섹터,Core Equity Beta,0,N,-12.53%,-9.35%,-12.67%,N,N,-14.62%,42/130,20.5,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A381170,TIGER 미국테크TOP10 INDXX,해외주식_섹터,Satellite Equity,0,N,-6.49%,-9.52%,-19.92%,N,N,-13.86%,45/130,19.8,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A091180,KODEX 자동차,국내주식_섹터,Satellite Equity,0,N,-2.70%,-23.20%,-34.31%,Y,N,-21.70%,91/130,19.6,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A251350,KODEX 선진국MSCI World,해외주식_지수,Core Equity Beta,0,N,-3.99%,-9.62%,-12.78%,N,N,-9.86%,46/130,19.5,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A101280,KODEX 일본TOPIX100,해외주식_지수,Core Equity Beta,0,N,-6.60%,-10.13%,-10.26%,N,N,-12.44%,47/130,19.3,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A227560,TIGER 200 생활소비재,국내주식_섹터,Core Equity Beta,0,N,-1.34%,-10.30%,-11.58%,N,N,-16.69%,48/130,19.1,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A238720,ACE 일본Nikkei225(H),해외주식_지수,Core Equity Beta,0,N,-5.34%,-10.87%,-0.60%,N,N,-17.07%,49/130,18.8,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A494410,PLUS 미국S&P500성장주,해외주식_섹터,Core Equity Beta,0,N,-5.99%,-10.97%,-15.83%,N,N,-13.53%,50/130,18.6,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A245350,TIGER 유로스탁스배당30,해외주식_섹터,Satellite Equity,0,N,-0.74%,-11.18%,-13.05%,N,N,-11.50%,51/130,18.4,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A462010,TIGER 2차전지소재Fn,국내주식_섹터,Satellite Equity,0,N,-1.72%,-11.30%,-38.71%,N,N,-25.28%,52/130,18.1,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A367380,ACE 미국나스닥100,해외주식_지수,Core Equity Beta,0,N,-6.13%,-11.44%,-17.56%,N,N,-14.27%,53/130,17.9,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A133690,TIGER 미국나스닥100,해외주식_지수,AI & Semiconductors,12,Y,-6.05%,-11.45%,-17.51%,N,N,-14.28%,54/130,17.7,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A280930,KODEX 미국러셀2000(H),해외주식_지수,Core Equity Beta,0,N,-4.21%,-11.57%,-4.06%,N,N,-11.99%,55/130,17.4,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A379810,KODEX 미국나스닥100,해외주식_지수,Core Equity Beta,0,N,-6.25%,-11.59%,-17.71%,N,N,-14.39%,56/130,17.2,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A305720,KODEX 2차전지산업,국내주식_섹터,Satellite Equity,0,N,-9.21%,-12.26%,-32.35%,N,N,-24.77%,57/130,17.0,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A411860,KIWOOM 독일DAX,해외주식_지수,Core Equity Beta,0,N,-0.85%,-12.39%,-14.80%,N,N,-12.84%,58/130,16.7,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A250730,RISE 차이나HSCEI(H),해외주식_지수,Core Equity Beta,0,N,-5.29%,-12.78%,-13.08%,N,N,-12.56%,60/130,16.3,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A227570,TIGER 우량가치,국내주식_섹터,Satellite Equity,0,N,-4.39%,-12.89%,-16.80%,N,N,-16.30%,61/130,16.0,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A305540,TIGER 2차전지테마,국내주식_섹터,Satellite Equity,0,N,-11.11%,-13.36%,-32.36%,N,N,-26.24%,64/130,15.3,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A241180,TIGER 일본니케이225,해외주식_지수,Core Equity Beta,0,N,-5.93%,-13.46%,-11.63%,N,N,-17.97%,65/130,15.1,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A195980,PLUS 신흥국MSCI(합성 H),해외주식_지수,Core Equity Beta,0,N,-5.76%,-14.14%,-8.67%,N,N,-16.00%,66/130,14.9,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A457480,ACE 테슬라밸류체인액티브,해외주식_섹터,Satellite Equity,0,N,-3.52%,-14.32%,-32.29%,N,N,-15.86%,67/130,14.7,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A463680,KODEX 미국S&P500테크놀로지,해외주식_섹터,Core Equity Beta,0,N,-10.30%,-14.71%,-16.45%,N,N,-19.13%,68/130,14.4,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A192090,TIGER 차이나CSI300,해외주식_지수,Core Equity Beta,0,N,-1.35%,-15.18%,-24.92%,N,N,-14.84%,70/130,14.0,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A168580,ACE 중국본토CSI300,해외주식_지수,Core Equity Beta,0,N,-1.29%,-15.20%,-24.13%,N,N,-14.76%,71/130,13.7,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A161510,PLUS 고배당주,국내주식_섹터,Satellite Equity,0,N,-4.17%,-15.30%,-18.91%,N,N,-18.39%,72/130,13.5,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A105010,TIGER 라틴35,해외주식_지수,Core Equity Beta,0,N,-13.67%,-15.64%,-25.79%,N,N,-23.37%,73/130,13.3,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A245360,TIGER 차이나HSCEI,해외주식_지수,Core Equity Beta,0,N,-3.65%,-15.85%,-22.23%,N,N,-14.35%,74/130,13.0,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A283580,KODEX 차이나CSI300,해외주식_지수,Core Equity Beta,0,N,-2.54%,-16.62%,-25.51%,N,N,-16.35%,76/130,12.6,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A099140,KODEX 차이나H,해외주식_지수,Core Equity Beta,0,N,-4.88%,-17.09%,-23.60%,N,N,-15.69%,77/130,12.3,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A139220,TIGER 200 건설,국내주식_섹터,Core Equity Beta,0,N,-11.79%,-17.12%,-28.95%,N,N,-27.21%,78/130,12.1,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A310080,RISE 중국MSCI China(H),해외주식_지수,Core Equity Beta,0,N,-6.38%,-17.32%,-17.83%,N,N,-16.89%,79/130,11.9,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A287180,PLUS 미국나스닥테크,해외주식_섹터,Satellite Equity,0,N,-11.84%,-19.60%,-19.51%,N,N,-22.91%,81/130,11.4,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A261920,ACE 필리핀MSCI(합성),해외주식_지수,Core Equity Beta,0,N,-6.00%,-19.84%,-21.50%,N,N,-20.34%,82/130,11.2,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A315270,TIGER 200커뮤니케이션서비스,국내주식_섹터,Core Equity Beta,0,N,-4.22%,-20.58%,-23.19%,N,N,-21.51%,83/130,10.9,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A232080,TIGER 코스닥150,국내주식_지수,Core Equity Beta,0,N,-8.92%,-20.63%,-37.76%,N,N,-30.74%,84/130,10.7,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A455850,SOL AI반도체소부장,국내주식_섹터,AI & Semiconductors,0,N,-14.39%,-20.66%,-36.31%,N,N,-43.65%,85/130,10.5,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A229200,KODEX 코스닥150,국내주식_지수,Core Equity Beta,0,N,-8.75%,-20.67%,-37.72%,N,N,-30.88%,86/130,10.2,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A227550,TIGER 200 산업재,국내주식_섹터,Korea Cyclical Alpha,0,N,-7.20%,-21.34%,-35.42%,N,N,-27.50%,87/130,10.0,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A390390,KODEX 미국반도체,해외주식_섹터,AI & Semiconductors,0,N,-11.98%,-21.97%,-26.12%,N,N,-28.26%,88/130,9.8,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A497570,TIGER 미국필라델피아AI반도체나스닥,해외주식_섹터,AI & Semiconductors,6,Y,-11.74%,-22.10%,-24.20%,N,N,-28.45%,89/130,9.5,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A381180,TIGER 미국필라델피아반도체나스닥,해외주식_지수,AI & Semiconductors,0,N,-10.15%,-22.63%,-26.11%,N,N,-28.29%,90/130,9.3,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A371460,TIGER 차이나전기차SOLACTIVE,해외주식_섹터,Satellite Equity,0,N,-3.17%,-23.39%,-42.03%,N,N,-21.65%,92/130,8.8,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A139240,TIGER 200 철강소재,국내주식_섹터,Core Equity Beta,0,N,-7.45%,-23.78%,-38.54%,N,N,-31.35%,93/130,8.6,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A446770,ACE 글로벌반도체TOP4 Plus,해외주식_섹터,AI & Semiconductors,0,N,-13.00%,-24.81%,-27.24%,N,N,-29.63%,94/130,8.4,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A102780,KODEX 삼성그룹,국내주식_섹터,Satellite Equity,0,N,-10.88%,-25.21%,-22.21%,N,N,-26.93%,95/130,8.1,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A139250,TIGER 200 에너지화학,국내주식_섹터,Core Equity Beta,0,N,-12.10%,-26.39%,-31.37%,N,N,-33.20%,96/130,7.9,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A315930,KODEX Top5PlusTR,국내주식_섹터,Satellite Equity,0,N,-5.47%,-26.56%,-28.26%,N,N,-26.75%,97/130,7.7,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A414780,TIGER 차이나과창판STAR50(합성),해외주식_지수,Core Equity Beta,0,N,-3.42%,-26.96%,-38.63%,N,N,-28.17%,98/130,7.4,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A226490,KODEX 코스피,국내주식_지수,Core Equity Beta,0,N,-8.49%,-27.18%,-30.55%,N,N,-28.87%,99/130,7.2,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A328370,PLUS 코스피TR,국내주식_지수,Core Equity Beta,0,N,-9.67%,-27.37%,-30.39%,N,N,-29.17%,100/130,7.0,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A277630,TIGER 코스피,국내주식_지수,Core Equity Beta,0,N,-8.94%,-27.40%,-30.53%,N,N,-29.21%,101/130,6.7,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A302450,RISE 코스피,국내주식_지수,Core Equity Beta,0,N,-9.29%,-27.87%,-30.90%,N,N,-29.17%,102/130,6.5,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A295040,SOL 200TR,국내주식_지수,Core Equity Beta,0,N,-8.33%,-28.23%,-30.16%,N,N,-30.23%,103/130,6.3,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A294400,KIWOOM 200TR,국내주식_지수,Core Equity Beta,0,N,-8.29%,-28.29%,-30.16%,N,N,-30.36%,104/130,6.0,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A278530,KODEX 200TR,국내주식_지수,Core Equity Beta,0,N,-8.33%,-28.30%,-30.14%,N,N,-30.27%,105/130,5.8,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A361580,RISE 200TR,국내주식_지수,Core Equity Beta,0,N,-8.38%,-28.38%,-30.35%,N,N,-30.35%,106/130,5.6,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A069500,KODEX 200,국내주식_지수,Core Equity Beta,10,Y,-8.53%,-28.48%,-30.60%,N,N,-30.48%,107/130,5.3,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A147970,TIGER 모멘텀,국내주식_섹터,Satellite Equity,0,N,-8.85%,-28.52%,-36.90%,N,N,-31.87%,108/130,5.1,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A148020,RISE 200,국내주식_지수,Core Equity Beta,0,N,-8.81%,-28.73%,-30.72%,N,N,-30.72%,109/130,4.9,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A456600,TIME 글로벌AI인공지능액티브,해외주식_섹터,Satellite Equity,0,N,-17.84%,-28.77%,-32.32%,N,N,-31.25%,110/130,4.7,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A152100,PLUS 200,국내주식_지수,Core Equity Beta,0,N,-8.95%,-28.80%,-30.85%,N,N,-30.75%,111/130,4.4,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A325010,KODEX 성장주,국내주식_섹터,Satellite Equity,0,N,-9.80%,-28.81%,-32.12%,N,N,-31.66%,112/130,4.2,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A102110,TIGER 200,국내주식_지수,Core Equity Beta,0,N,-9.06%,-28.84%,-30.69%,N,N,-30.80%,113/130,4.0,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A156080,KODEX MSCI Korea,국내주식_지수,Core Equity Beta,0,N,-9.73%,-29.38%,-30.68%,N,N,-31.47%,114/130,3.7,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A487230,KODEX 미국AI전력핵심인프라,해외주식_섹터,AI Power Infrastructure,4,Y,-5.96%,-29.39%,-44.97%,N,N,-33.02%,115/130,3.5,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A278540,KODEX MSCI Korea TR,국내주식_지수,Core Equity Beta,0,N,-9.24%,-29.74%,-30.33%,N,N,-31.25%,116/130,3.3,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A371160,TIGER 차이나항셍테크,해외주식_지수,Core Equity Beta,0,N,-9.59%,-30.03%,-37.13%,N,N,-27.88%,117/130,3.0,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A091160,KODEX 반도체,국내주식_섹터,AI & Semiconductors,0,N,-14.01%,-30.23%,-37.13%,N,N,-41.31%,118/130,2.8,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A372330,KODEX 차이나항셍테크,해외주식_지수,Core Equity Beta,0,N,-9.88%,-30.44%,-37.62%,N,N,-27.95%,119/130,2.6,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A363580,KODEX 200IT TR,국내주식_섹터,Core Equity Beta,0,N,-12.12%,-30.91%,-29.60%,N,N,-36.62%,120/130,2.3,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A139260,TIGER 200 IT,국내주식_섹터,Core Equity Beta,0,N,-12.16%,-31.26%,-30.80%,N,N,-36.85%,121/130,2.1,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A395270,HANARO Fn K-반도체,국내주식_섹터,AI & Semiconductors,0,N,-12.56%,-32.85%,-29.60%,N,N,-38.15%,122/130,1.9,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A395160,KODEX AI반도체,국내주식_섹터,AI & Semiconductors,8,Y,-12.25%,-33.25%,-28.70%,N,N,-37.88%,123/130,1.6,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A487240,KODEX AI전력핵심설비,국내주식_섹터,AI Power Infrastructure,0,N,-13.84%,-34.18%,-55.31%,N,N,-42.28%,124/130,1.4,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A434730,HANARO 원자력iSelect,국내주식_섹터,AI Power Infrastructure,0,N,-17.57%,-35.91%,-52.67%,N,N,-44.90%,125/130,1.2,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A494670,TIGER 조선TOP10,국내주식_섹터,Korea Cyclical Alpha,0,N,-10.75%,-37.11%,-52.11%,N,N,-40.61%,126/130,0.9,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A466920,SOL 조선TOP3플러스,국내주식_섹터,Korea Cyclical Alpha,4,Y,-11.87%,-37.93%,-53.05%,N,N,-41.33%,127/130,0.7,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A139230,TIGER 200 중공업,국내주식_섹터,Korea Cyclical Alpha,0,N,-15.12%,-39.04%,-55.38%,N,N,-44.81%,128/130,0.5,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A463250,TIGER K방산&우주,국내주식_섹터,Korea Cyclical Alpha,0,N,-14.10%,-39.38%,-52.49%,N,N,-43.18%,129/130,0.2,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A449450,PLUS K방산,국내주식_섹터,Korea Cyclical Alpha,3,Y,-15.98%,-42.11%,-55.05%,N,N,-45.65%,130/130,0.0,Cut,매도/축소 후보,Yahoo Finance chart API
+2026-11-24,A310970,TIGER MSCI Korea TR,국내주식_지수,Core Equity Beta,0,N,,,,,,,,,Watch,데이터 확인 필요,Fetch failed: failed to fetch Yahoo chart data for 310970.KS: 310970.KS returned only 1 valid closes
